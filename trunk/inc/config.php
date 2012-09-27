@@ -8,4 +8,3 @@ define('DB_NAME', 'cmctest');
 
 
 ?>
-
