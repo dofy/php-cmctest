@@ -1,8 +1,12 @@
 <?php
 
+include('../inc/config.php');
 include('../inc/utils.php');
 
-echo $_GET['test'];
+include('../inc/MyDB.php');
+
+$db = new MyDB();
+
 
 
 ?>
