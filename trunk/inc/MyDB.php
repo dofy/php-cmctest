@@ -16,7 +16,7 @@ class MyDB
 	
 	public $debug = false;
 	
-	public function MyDB($host, $user, $pass, $dbName, $coding = 'UTF8')
+	public function __construct($host, $user, $pass, $dbName, $coding = 'UTF8')
 	{
 		$this->db_host = $host;
 		$this->db_user = $user;
