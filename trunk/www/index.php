@@ -1,9 +1,6 @@
 <?php
 
-include('../inc/config.php');
-include('../inc/utils.php');
-
-include('../inc/MyDB.php');
+include('../inc/include_all.php');
 
 $db = new MyDB(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 $db->debug = true;
