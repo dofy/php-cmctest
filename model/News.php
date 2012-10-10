@@ -6,7 +6,7 @@
  * Update:  
  */
 
-include('../inc/MyDB.php');
+include(dirname(__FILE__) . '/../inc/MyDB.php');
 
 class News extends MyDB
 {
@@ -29,7 +29,10 @@ class News extends MyDB
     {
         $this->select($this->table, '*', null, $limit);
         
-        while($result[] = $this->fetch_assoc());
+        while($row = $this->fetch_assoc())
+        {
+            $result[] = $row;
+        }
         
         return $result;
     }

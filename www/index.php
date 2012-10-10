@@ -1,24 +1,14 @@
 <?php
 
+include(dirname(__FILE__) . '/../inc/config.php');
+include(dirname(__FILE__) . '/../inc/utils.php');
+include(dirname(__FILE__) . '/../inc/MySmarty.php');
+
 header('content-charset:utf8');
 
-include('../inc/include_all.php');
+$smarty = new MySmarty();
 
-include('../model/News.php');
+//$smarty->testInstall();
 
-$news = new News();
-
-$t = "asdf'as\df";
-$c = 'asdf';
-//$id = $news->create(addslashes($t), addslashes($c));
-
-echo '<pre>';
-var_dump($news->getList('3'));
-echo '</pre>';
-
+$smarty->display('index.tpl');
 ?>
-
-<form>
-    <input type="text" name="test" />
-    <input type="submit" />
-</form>
