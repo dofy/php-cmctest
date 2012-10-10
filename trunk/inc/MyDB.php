@@ -14,7 +14,7 @@ class MyDB
 	private $last_sql = '';
 	protected $result;
 	
-	public $debug = true;
+	public $debug = false;
 	
 	public function __construct($host, $user, $pass, $dbName, $coding = 'UTF8')
 	{
