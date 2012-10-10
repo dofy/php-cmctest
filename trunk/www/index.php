@@ -1,24 +1,24 @@
 <?php
 
+header('content-charset:utf8');
+
 include('../inc/include_all.php');
 
-$db = new MyDB(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-$db->debug = true;
+include('../model/News.php');
 
-echo $db->insert('news', 'title,content', "'现要','克世世代代要'");
+$news = new News();
 
-echo $db->select("news ");
+$t = "asdf'as\df";
+$c = 'asdf';
+//$id = $news->create(addslashes($t), addslashes($c));
 
-
-while($row = $db->fetch_assoc())
-{
-    var_dump($row);
-}
+echo '<pre>';
+var_dump($news->getList('3'));
+echo '</pre>';
 
 ?>
 
-
 <form>
-    <input type="text" name="test"/>
+    <input type="text" name="test" />
     <input type="submit" />
 </form>

@@ -7,5 +7,4 @@
  */
 include('../inc/config.php');
 include('../inc/utils.php');
-include('../inc/MyDB.php');
 ?>
