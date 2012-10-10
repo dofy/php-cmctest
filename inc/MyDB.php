@@ -12,9 +12,9 @@ class MyDB
 	private $conn;
 	
 	private $last_sql = '';
-	private $result;
+	protected $result;
 	
-	public $debug = false;
+	public $debug = true;
 	
 	public function __construct($host, $user, $pass, $dbName, $coding = 'UTF8')
 	{
@@ -59,13 +59,17 @@ class MyDB
 		}
 	}
 	
-	public function select($table, $columnName = "*", $condition = null)
+	public function select($table, $columnName = "*", $condition = NULL, $limit = NULL)
 	{
 		$condition = $condition
-			? ' WHERE ' . $condition
+			? 'WHERE ' . $condition
 			: NULL;
 		
-		$sql = "SELECT $columnName FROM $table $condition";
+        $limit = $limit
+            ? 'LIMIT ' . $limit
+            : NULL;
+        
+		$sql = "SELECT $columnName FROM $table $condition $limit";
 		$this->query($sql);
 		
 		return mysql_numrows($this->result);
