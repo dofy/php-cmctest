@@ -84,9 +84,9 @@ class SevenApplication
         
         $this->controller->setView($this->view);
         // 执行 Action
-        $this->controller->beforeIndex();
+        $this->controller->beforeAction();
         $this->controller->$an();
-        $this->controller->afterIndex();
+        $this->controller->afterAction();
         
         // 渲染模板
         @$this->view->display($tpl_file);
