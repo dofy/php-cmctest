@@ -19,8 +19,14 @@ class DefaultController extends SevenController
         echo 'index test';
     }
 
-    public function beforeIndex()
+    public function tttAction()
     {
+        echo 'ttt action';
+    }
+
+    public function beforeAction()
+    {
+        echo 'befor--';
     }
 }
 ?>

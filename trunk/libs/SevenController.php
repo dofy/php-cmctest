@@ -46,7 +46,7 @@ class SevenController
     /**
      * 执行动作前
      **/
-    public function beforeIndex()
+    public function beforeAction()
     {
         // nothing
     }
@@ -54,7 +54,7 @@ class SevenController
     /**
      * 执行动作后
      **/
-    public function afterIndex()
+    public function afterAction()
     {
         // nothing
     }
