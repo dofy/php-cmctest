@@ -32,7 +32,7 @@ class SevenApplication
     /**
      * 初始化(框架核心)
      **/
-    public function init()
+    public function run()
     {
         // 取 controller
         if(isset($_REQUEST[$this->cflag]))
