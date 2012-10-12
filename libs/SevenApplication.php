@@ -12,6 +12,7 @@ class SevenApplication
 {
     private $cflag;
     private $aflag;
+    private $pre;
     private $controller;
     private $view;
     
@@ -20,10 +21,12 @@ class SevenApplication
      * @param   String  $cflag   控制器键名
      * @param   String  $aflag   动作器键名
      **/
-    public function __construct($cflag = 'c', $aflag = 'a')
+    public function __construct($cflag = 'c', $aflag = 'a', $pre = null)
     {
         $this->cflag = $cflag;
         $this->aflag = $aflag;
+
+        $this->pre = $pre;
     }
     
     /**
@@ -36,27 +39,30 @@ class SevenApplication
         {
             $c = ucfirst(strtolower(trim($_REQUEST[$this->cflag])));
         }
-        else
+        
+        if(empty($c))
         {
-            //if(empty($c)) 
             $c = 'Default';
         }
+
         $cn = $c . 'Controller';
-        $cf = __BASE_PATH . '..' . __DS . 'controllers' . __DS . $cn . '.php';
+        $cf = __BASE_PATH . '..' . __DS . 'controllers' . __DS . $this->pre . $cn . '.php';
         
         // 判断类文件是否存在, 不存在, 报错
         if(!file_exists($cf))
-            die('类文件不存在: <em>' . $cn . '</em>');
+            die('类文件不存在: <em>' . $cf . '</em>');
         
         // 取 action
         if(isset($_REQUEST[$this->aflag]))
         {
             $a = strtolower(trim($_REQUEST[$this->aflag]));
         }
-        else
+        
+        if(empty($a))
         {
             $a = 'index';
         }
+        
         $an = $a . 'Action';
         
         // 类存在, 引入并创建类
@@ -71,7 +77,7 @@ class SevenApplication
         }
         
         // 获取模板文件
-        $tpl_file = strtolower($c) . __DS . $a . '.tpl';
+        $tpl_file = $this->pre . strtolower($c) . __DS . $a . '.tpl';
         
         // 加载模板
         $this->view = new SevenView();

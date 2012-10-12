@@ -5,7 +5,7 @@ session_start();
 include dirname(__FILE__) . '/../libs/SevenApplication.php';
 
 // new controller
-$app = new SevenApplication();
+$app = new SevenApplication('c', 'a', 'ma_');
 
 // init
 $app->init();
