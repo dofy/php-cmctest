@@ -1,9 +1,12 @@
-body{
+body, input, textarea{
     font: 1em "courier new";
+}
+
+#cat strong{
+    text-decoration: underline;
 }
 
 .copy{
     font-size: 0.75em;
-    text-align: center;
     color: #ccc;
 }
