@@ -74,6 +74,12 @@ class SevenDB
 		
 		return mysql_numrows($this->result);
 	}
+    
+    public function getOne($table, $columnName = "*", $condition = NULL)
+    {
+        $this->select($table, $columnName, $condition, '1');
+        return $this->fetch_assoc();
+    }
 	
 	public function insert($table, $columnName, $value)
 	{
@@ -111,6 +117,11 @@ class SevenDB
 	{
 		return @mysql_fetch_assoc($this->result);
 	}
+    
+    public function sqlstr($str)
+    {
+        return addslashes($str);
+    }
 
     /**
      * 析构, 关闭 mysql 连接

@@ -21,5 +21,4 @@
 <div id="header" class="grid_12" >
     <h2>{#title#} Manager</h2>
 </div>
-
-{include file="inc_ma/nav.tpl"}
+<div class="clear"></div>

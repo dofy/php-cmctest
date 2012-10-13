@@ -6,7 +6,7 @@
  * Update:  11/20/08
  */
 
-class DefaultController extends SevenController
+class NewsController extends SevenController
 {
     public function __construct($action)
     {
@@ -23,7 +23,7 @@ class DefaultController extends SevenController
     {
         if(!COMM::getSs('islogin'))
         {
-            header('Location:?c=login');
+            //header('Location:?c=login');
         }
     }
 }
