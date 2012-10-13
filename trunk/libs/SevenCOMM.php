@@ -17,6 +17,26 @@ class COMM
         else
             return $default;
     }
+    
+    static public function getSs($key, $default = null)
+    {
+        return $_SESSION[$key] or $default;
+    }
+    
+    static public function setSs($key, $value)
+    {
+        $_SESSION[$key] = $value;
+    }
+    
+    static public function delSc($key)
+    {
+        
+    }
+    
+    static public function clrSc()
+    {
+        session_unset();
+    }
 }
 
 ?>
