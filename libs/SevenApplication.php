@@ -81,6 +81,8 @@ class SevenApplication
         
         // 加载模板
         $this->view = new SevenView();
+        $this->view->assign('__controller', ucfirst($c));
+        $this->view->assign('__action', ucfirst($a));
         
         $this->controller->setView($this->view);
         // 执行 Action

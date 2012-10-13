@@ -1,0 +1,9 @@
+body{
+    font: 1em "courier new";
+}
+
+.copy{
+    font-size: 0.75em;
+    text-align: center;
+    color: #ccc;
+}

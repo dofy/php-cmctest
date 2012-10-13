@@ -16,7 +16,6 @@ class DefaultController extends SevenController
 
     public function indexAction()
     {
-        echo 'index test ma____';
     }
 
     public function beforeIndex()
