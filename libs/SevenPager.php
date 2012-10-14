@@ -28,10 +28,10 @@ class SevenPager
 		$this->pagecount   = $pageInfo['pagecount']   ? $pageInfo['pagecount']   : 0;
 		$this->recordcount = $pageInfo['recordcount'] ? $pageInfo['recordcount'] : 0;
 		
-		$this->beforeBlock = $htmlTags['beforeBlock'] ? $htmlTags['beforeBlock'] : '<ul>';
-		$this->afterBlock  = $htmlTags['afterBlock']  ? $htmlTags['afterBlock']  : '</ul>';
-		$this->beforeItem  = $htmlTags['beforeItem']  ? $htmlTags['beforeItem']  : '<li>';
-		$this->afterItem   = $htmlTags['afterItem']   ? $htmlTags['afterItem']   : '</li>';
+		$this->beforeBlock = isset($htmlTags['beforeBlock']) ? $htmlTags['beforeBlock'] : '<ul>';
+		$this->afterBlock  = isset($htmlTags['afterBlock'])  ? $htmlTags['afterBlock']  : '</ul>';
+		$this->beforeItem  = isset($htmlTags['beforeItem'])  ? $htmlTags['beforeItem']  : '<li>';
+		$this->afterItem   = isset($htmlTags['afterItem'])   ? $htmlTags['afterItem']   : '</li>';
     }
 	
 	public function create($pstr = 'page', $offset = 3)

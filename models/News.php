@@ -12,9 +12,15 @@ class News extends SevenModule
         parent::__construct();
     }
     
-    public function getList()
+    public function getList($page = 1)
     {
-        $this->db->select('news');
+        $this->db->getCount('news');
+        return $this->db->getRows("select * from news", $page, 2);
+    }
+    
+    public function pageInfo()
+    {
+        return $this->db->pageInfo();
     }
 }
 

@@ -10,13 +10,14 @@ class DefaultController extends SevenController
 {
     public function __construct($action)
     {
-        $this->models = array('news');
         parent::__construct($action);
     }
 
     public function indexAction()
     {
-        $this->News;
+        $this->view->assign('user', $_SESSION['username']);
+        $this->view->assign('lastip', $_SESSION['lastip']);
+        $this->view->assign('updated', $_SESSION['updated']);
     }
 
     public function beforeAction()

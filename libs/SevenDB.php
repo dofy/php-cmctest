@@ -1,103 +1,97 @@
 <?php
-
+/**
+ * Author:  Seven Yu
+ * E-Mail:  dofyyu@gmail.com
+ * Version: 1.0
+ * Update:  11/20/08
+ */
 class SevenDB
 {
-	private $db_host;
-	private $db_user;
-	private $db_pass;
-	private $db_name;
-	
-	private $db_coding;
-	
-	private $conn;
-	
-	private $last_sql = '';
-	protected $result;
-	
-	public $debug = false;
-	
-	public function __construct($host, $user, $pass, $dbName, $coding = 'UTF8')
-	{
-		$this->db_host = $host;
-		$this->db_user = $user;
-		$this->db_pass = $pass;
-		$this->db_name = $dbName;
-		
-		$this->db_coding = $coding;
-		
-		$this->connect();
-	}
-	
-	private function connect()
-	{
-		$this->conn = mysql_connect($this->db_host, $this->db_user, $this->db_pass);
-		mysql_selectdb($this->db_name, $this->conn);
-		
-		$this->query("SET NAMES $this->db_coding;");
-	}
-	
-	public function lastSQL()
-	{
-		return $this->last_sql;
-	}
-	
-	private function query($sql)
-	{
-		if($this->debug)
-			printf('<div style="font-family:courier new;background-color:#f2f2f2;">%s</div>', $sql);
-			
-		$this->lastSQL = $sql;
-		$result = mysql_query($sql);
-		
-		if($result)
-		{
-			$this->result = $result;
-		}
-		else
-		{
-			printf('<div style="font-family:courier new;background-color:#fc0;">%s</div>', mysql_error());
-		}
-	}
-	
-	public function select($table, $columnName = "*", $condition = NULL, $limit = NULL)
-	{
-		$condition = $condition
-			? 'WHERE ' . $condition
-			: NULL;
-		
-        $limit = $limit
-            ? 'LIMIT ' . $limit
-            : NULL;
-        
-		$sql = "SELECT $columnName FROM $table $condition $limit";
-		$this->query($sql);
-		
-		return mysql_numrows($this->result);
-	}
-    
-    public function getOne($table, $columnName = "*", $condition = NULL)
+    public $recordcount = 0;
+    public $pagesize    = 20;
+    public $page        = 1;
+    public $pagecount   = 1;
+
+    public  $debug = false;
+    private $last_sql;
+
+    public function __construct($host, $user, $pass, $db = 'test', $charset = 'utf8')
     {
-        $this->select($table, $columnName, $condition, '1');
-        return $this->fetch_assoc();
+        mysql_connect($host, $user, $pass);
+        mysql_select_db($db);
+        mysql_query("set names '$charset';");
     }
-	
-	public function insert($table, $columnName, $value)
-	{
-		$this->query("INSERT INTO $table ($columnName) VALUES ($value)");
-		return mysql_insert_id();
-	}
-	
-	public function update($table, $mod_content, $condition)
-	{
-		$this->query("UPDATE $table SET $mod_content WHERE $condition");
-		return mysql_affected_rows();
-	}
-	
-	public function delete($table, $condition)
-	{
-		$this->query("DELETE FROM $table WHERE $condition");
-		return mysql_affected_rows();
-	}
+
+    /**
+     * 执行 SQL 语句
+     * @param String $sql 要执行的 SQl 语句
+     **/
+    public function query($sql)
+    {
+        if($this->debug)
+            echo '<pre>-- ' . $sql . '</pre>';
+        $this->last_sql = $sql;
+        return mysql_query($sql);
+    }
+    
+    /**
+     * 执行 insert 语句
+     * @param   String  $table      表明
+     * @param   String  $object     对象键值对数组
+     * @return  int     insert_id   被插入记录的 id
+     **/
+    public function insert($table, $object)
+    {
+        if((!is_array($object)) || count($object) == 0) return false;
+        $keys = array();
+        $vals = array();
+        foreach($object as $key=>$val)
+        {
+            array_push($keys, $key);
+            array_push($vals, $this->sqlstr($val));
+        }
+        $skey = join('`,`', $keys);
+        $sval = join("','", $vals);
+        $sql = "insert into `$table` (`$skey`) values ('$sval')";
+        $this->query($sql);
+        return mysql_insert_id();
+    }
+
+    public function update($table, $object, $which)
+    {
+        if((!is_array($object)) || count($object) == 0 || (!is_array($which)) || count($which) == 0 ) return false;
+        $objs = array();
+        $whis = array();
+        foreach($object as $key=>$val)
+        {
+            array_push($objs, "`$key` = '".$this->sqlstr($val)."'");
+        }
+        foreach($whick as $key=>$val)
+        {
+            array_push($whis, "`$key` = '".$this->sqlstr($val)."'");
+        }
+        $sobj = join(',', $objs);
+        $swhi = join(" and ", $whis);
+        $sql = "update `$table` set $sobj where $swhi";
+        $this->query($sql);
+        return mysql_affected_rows();
+    }
+
+    /**
+     * 取得所有记录
+     * @param   String  $sql            要执行的 SQL 语句
+     * @return  Array   $arr_return     返回结果数组
+     **/
+    public function getAll($sql)
+    {
+        $arr_return = array();
+        $result = $this->query($sql);
+        while($row = mysql_fetch_assoc($result))
+        {
+            array_push($arr_return, $row);
+        }
+        return $arr_return;
+    }
     
     /**
      *  获取指定表的记录数
@@ -105,22 +99,79 @@ class SevenDB
      *  @param  string  $key    主键
      *  @param  string  $others 其他 SQL 部分
      **/
-    public function getCount($table, $key = 'id', $others = null)
+    public function getCount($table, $key = 'id', $others = '')
     {
-        $sql = "SELECT COUNT($key) FROM $table $others";
-        $result = mysql_query($sql);
+        $sql = "select count(`$key`) from `$table` $others";
+        $result = $this->query($sql);
         $row = mysql_fetch_row($result);
+        $this->recordcount = $row[0];
         return $row[0];
     }
-	
-	public function fetch_assoc()
-	{
-		return @mysql_fetch_assoc($this->result);
-	}
+
+    /**
+     * 获取指定记录(用于翻页)
+     * @param  string  $sql        要执行的 SQL 语句
+     * @param  int     $page       当前页
+     * @param  int     $pagesize   每页条数
+     * @resutn 记录数组
+     **/
+    public function getRows($sql, $page = 1, $pagesize = 20)
+    {
+        $this->pagesize = intval($pagesize) > 0 ? $pagesize : 20;
+        $this->pagecount = ceil($this->recordcount / $this->pagesize);
+        $this->page = max(1, min(max(1, intval($page)), $this->pagecount));
+
+        $limit_begin = $this->pagesize * ($this->page - 1);
+        $limit_count = $this->pagesize;
+        
+        $arr_return = array();
+        $result = $this->query($sql . " limit $limit_begin, $limit_count");
+        while($row = mysql_fetch_assoc($result))
+        {
+            array_push($arr_return, $row);
+        }
+        return $arr_return;
+    }
+
+    /**
+     * 取得一条记录
+     * @param  String $sql 要执行的 SQl 语句
+     * @return 数据记录
+     **/
+    public function getOne($sql)
+    {
+        $result = $this->query($sql . ' limit 1');
+        return mysql_fetch_assoc($result);
+    }
     
+    /**
+     * 返回页数信息
+     * @return array pageInfo
+     **/
+    public function pageInfo()
+    {
+        return array('page'=>$this->page,
+                     'pagesize'=>$this->pagesize,
+                     'pagecount'=>$this->pagecount,
+                     'recordcount'=>$this->recordcount);
+    }
+
+    /**
+     * 过滤 SQL 敏感字符
+     * @param string $str 过滤字符
+     **/
     public function sqlstr($str)
     {
         return addslashes($str);
+    }
+
+    /**
+     * 获取最后执行的 SQL 语句
+     * @return string $last_sql 最后执行的 SQL 语句
+     **/
+    public function lastSQL()
+    {
+        return $this->last_sql;
     }
 
     /**
@@ -131,6 +182,4 @@ class SevenDB
         @mysql_close();
     }
 }
-
-
 ?>

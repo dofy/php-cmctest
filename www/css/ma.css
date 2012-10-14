@@ -1,11 +1,56 @@
 body, input, textarea{
     font: 1em "courier new";
 }
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid #999;
+  border-right: 1px solid #999;
+}
+th {
+    background-color: #eee;
+}
+td, th {
+  border-bottom: 1px solid #999;
+  border-left: 1px solid #999;
+  padding: 3px;
+}
+#nav .top {
+    padding: 5px;
+}
 
+#nav a{
+    display: block;
+    margin: 0;
+    padding: 5px 9px;
+}
 #cat strong{
     text-decoration: underline;
 }
-
+#page {
+    margin: 5px;
+}
+#page li{
+    float: left;
+}
+#page a{
+    display: block;
+    margin: 0;
+    padding: 3px;
+}
+.curpage {
+    font-weight: bold;
+}
+.msg {
+    clear: both;
+    padding: 5px;
+    background-color: #ff0;
+}
 .copy{
     font-size: 0.75em;
     color: #ccc;
