@@ -15,14 +15,17 @@ class SevenController
     public function __construct($action)
     {
         $this->action = $action;
-        foreach($this->models as $model)
+        if(count($this->models))
         {
-            $model = ucfirst(strtolower($model));
-            $m_file = __BASE_PATH . '..' . __DS . 'models' . __DS . $model . '.php';
-            if(file_exists($m_file))
+            foreach($this->models as $model)
             {
-                include $m_file;
-                $this->$model = new $model;
+                $model = ucfirst(strtolower($model));
+                $m_file = __BASE_PATH . '..' . __DS . 'models' . __DS . $model . '.php';
+                if(file_exists($m_file))
+                {
+                    include $m_file;
+                    $this->$model = new $model;
+                }
             }
         }
     }

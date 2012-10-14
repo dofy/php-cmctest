@@ -16,7 +16,7 @@ class Users extends SevenModule
     {
         $username = $this->db->sqlstr($username);
         $password = $this->db->sqlstr($password);
-        return $this->db->getOne('users', '*', "`username` = '$username' and `password` = md5('$password')");
+        return $this->db->getOne("select * from `users` where `username` = '$username' and `password` = md5('$password')");
     }
 
     public function savePass($pass)
@@ -26,12 +26,12 @@ class Users extends SevenModule
     
     public function getList()
     {
-        return $this->db->select('users');
+        return $this->db->getAll('select * from `users`');
     }
 
     public function getUser($id)
     {
-        return $this->db->getOne('users', '*', "`id` = $id");
+        return $this->db->getOne("select * from `users` where `id` = $id");
     }
 
     public function getUserByName($username)
@@ -51,12 +51,12 @@ class Users extends SevenModule
 
     public function updateIP($id, $ip)
     {
-        $this->db->update('users', "``lastip` = '$ip'", "`id` = $id");
+        $this->db->query("update `users` set `updated` = now(), `lastip` = '$ip' where `id` = $id");
     }
 
     public function delUser($id)
     {
-        return $this->db->delete('users', "id = $id");
+        return $this->db->query("delete from `users` where id = $id");
     }
 
 }

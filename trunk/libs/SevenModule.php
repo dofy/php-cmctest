@@ -7,10 +7,12 @@
  */
 class SevenModule
 {
-    public $db;
+    protected $db;
+    
     public function __construct()
     {
-        $this->db = new SevenDB('', 'root', '', 'keywordlog');
+        $this->db = new SevenDB('', 'root', '', 'cmctest');
+        //$this->db->debug = true;
     }
 }
 ?>

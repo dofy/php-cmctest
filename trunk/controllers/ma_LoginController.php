@@ -29,6 +29,7 @@ class LoginController extends SevenController
             
             $_SESSION['islogin']  = true;
             $_SESSION['lastip']   = $user['lastip'];
+            $_SESSION['updated']  = $user['updated'];
             $_SESSION['id']       = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['level']    = $user['level'];
@@ -38,8 +39,14 @@ class LoginController extends SevenController
         else
         {
             $_SESSION['islogin'] = false;
-            header('Location:?c=login&msg=error');
+            $this->view->assign('msg', '登录失败.');
         }
+    }
+    
+    public function logoutAction()
+    {
+        COMM::clrSc();
+        header('location: ?c=login');
     }
 
     public function beforeAction()

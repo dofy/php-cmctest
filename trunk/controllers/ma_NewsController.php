@@ -16,14 +16,18 @@ class NewsController extends SevenController
 
     public function indexAction()
     {
-        $this->News;
+        $page = COMM::gets('page', 1);
+        $this->view->assign('news', $this->News->getList($page));
+        
+        $pager = new SevenPager($this->News->pageInfo());
+        $this->view->assign('page', $pager->createHtml('page', 1));
     }
 
     public function beforeAction()
     {
         if(!COMM::getSs('islogin'))
         {
-            //header('Location:?c=login');
+            header('Location:?c=login');
         }
     }
 }
