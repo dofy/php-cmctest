@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="css/grid.css" />
 <link rel="stylesheet" href="css/ma.css" />
 
+<script src="js/main.js" ></script>
+
 </head>
 
 <body>
