@@ -1,4 +1,4 @@
-body, input, textarea{
+body, input, textarea, select{
     font: 1em "courier new";
 }
 ul, li {

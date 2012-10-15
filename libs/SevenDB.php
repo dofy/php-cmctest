@@ -66,13 +66,27 @@ class SevenDB
         {
             array_push($objs, "`$key` = '".$this->sqlstr($val)."'");
         }
-        foreach($whick as $key=>$val)
+        foreach($which as $key=>$val)
         {
             array_push($whis, "`$key` = '".$this->sqlstr($val)."'");
         }
         $sobj = join(',', $objs);
         $swhi = join(" and ", $whis);
         $sql = "update `$table` set $sobj where $swhi";
+        $this->query($sql);
+        return mysql_affected_rows();
+    }
+
+    public function delete($table, $which)
+    {
+        if(!is_array($which) || count($which) == 0 ) return false;
+        $whis = array();
+        foreach($which as $key=>$val)
+        {
+            $whis[] = "`$key` = '" . $this->sqlstr($val) . "'";
+        }
+        $swhi = join(" and ", $whis);
+        $sql = "delete from `$table` where $swhi";
         $this->query($sql);
         return mysql_affected_rows();
     }
