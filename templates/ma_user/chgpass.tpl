@@ -3,16 +3,17 @@
 {include file="inc_ma/nav.tpl"}
 
 <div id="content" class="grid_9">
-    {include file="inc_ma/cat.tpl"}
+{include file="inc_ma/cat.tpl"}
 {if $m == 'ok'}
 <p class="msg" >密码修改成功.</p>
 {/if}
 <p >
+<div class="clear"></div>
 <form method="post" action="?c=user&a=savepass" onsubmit="return checkForm();">
  <p ><strong>修改密码:</strong></p>
  <p ><label for="npass">输入新密码:</label><input id="npass" type="password" name="npass" /></p>
  <p ><label for="rpass">确认新密码:</label><input id="rpass" type="password" name="rpass" /></p>
- <p ><input type="submit" /></p>
+ <p ><input type="submit" value="修改密码" /></p>
 </form>
 </p>
 </div>

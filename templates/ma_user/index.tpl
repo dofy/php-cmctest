@@ -9,6 +9,7 @@
     {elseif $m == 'name'}
     <p class="msg" >用户已经存在.</p>
     {/if}
+    <div class="clear"></div>
     <form method="post" action="?c=user&a=save" onsubmit="return checkForm();">
     <strong>{if $user.id > 0}修改{else}添加{/if}用户:</strong>
      <label for="username">用户名:</label><input id="username" type="text" name="username" value="{$user.username}" {if $user.id>0}readonly="readonly"{/if} />
