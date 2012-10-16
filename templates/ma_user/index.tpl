@@ -10,7 +10,7 @@
     <p class="msg" >用户已经存在.</p>
     {/if}
     <div class="clear"></div>
-    <form method="post" action="?c=user&a=save" onsubmit="return checkForm();">
+    <form method="post" action="?c=user&a=save" onsubmit="return checkForm(this);">
     <strong>{if $user.id > 0}修改{else}添加{/if}用户:</strong>
      <label for="username">用户名:</label><input id="username" type="text" name="username" value="{$user.username}" {if $user.id>0}readonly="readonly"{/if} />
      <label for="password">密码:</label><input id="password" type="text" name="password" />
@@ -52,14 +52,12 @@
     </p>
 </div>
 
-<script type="text/javascript">
+<script >
 <!--
 {literal}
-document.forms[0].username.focus();
-function checkForm()
+function checkForm(frm)
 {
-    var frm = document.forms[0];
-    if(frm.username.value.trim() == '')
+    if($.trim(frm.username.value) == '')
     {
         alert('请填写用户名.');
         frm.username.focus();

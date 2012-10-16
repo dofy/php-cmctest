@@ -57,6 +57,7 @@ class SevenDB
         return mysql_insert_id();
     }
 
+    
     public function update($table, $object, $which)
     {
         if((!is_array($object)) || count($object) == 0 || (!is_array($which)) || count($which) == 0 ) return false;
@@ -109,11 +110,11 @@ class SevenDB
     
     /**
      *  获取指定表的记录数
-     *  @param  int     $table  数据表
+     *  @param  string  $table  数据表
      *  @param  string  $key    主键
      *  @param  string  $others 其他 SQL 部分
      **/
-    public function getCount($table, $key = 'id', $others = '')
+    public function getCount($table, $key = 'id', $others = null)
     {
         $sql = "select count(`$key`) from `$table` $others";
         $result = $this->query($sql);

@@ -1,6 +1,6 @@
-{literal}
 <script charset="utf-8" src="editor/kindeditor-min.js"></script>
 <script charset="utf-8" src="editor/lang/zh_CN.js"></script>
+{literal}
 <script >
     var editor;
     KindEditor.ready(function(K) {

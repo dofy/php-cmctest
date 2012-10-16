@@ -11,7 +11,7 @@
     <script >
     function checkForm(frm)
     {
-        if(frm.title.value.trim() == '')
+        if($.trim(frm.title.value) == '')
         {
             alert('请填写新闻标题.');
             frm.title.focus();
