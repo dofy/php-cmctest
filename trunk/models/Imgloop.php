@@ -12,51 +12,29 @@ class Imgloop extends SevenModule
         parent::__construct();
     }
     
-    public function checkUser($username, $password)
-    {
-        $username = $this->db->sqlstr($username);
-        $password = $this->db->sqlstr($password);
-        return $this->db->getOne("select * from `imgloop` where `username` = '$username' and `password` = md5('$password')");
-    }
-
-    public function savePass($pass)
-    {
-        return $this->db->query("update `imgloop` set `password` = md5('$pass') where `id` = $_SESSION[id]");
-    }
-    
     public function getList()
     {
         return $this->db->getAll('select * from `imgloop`');
     }
 
-    public function getUser($id)
+    public function addImage($url)
     {
-        return $this->db->getOne("select * from `imgloop` where `id` = $id");
+        return $this->db->insert('imgloop', array('url'=>$url));
+    }
+    
+    public function getImage($url)
+    {
+        return $this->db->getCount('imgloop', 'id', "where url='$url'");
     }
 
-    public function getUserByName($username)
+    public function showImage($id, $show)
     {
-        return $this->db->getOne("select * from `imgloop` where `username` = '" . $this->db->sqlstr($username) . "'");
+        return $this->db->update('imgloop', array('show'=>$show), array('id'=>$id));
     }
 
-    public function addUser($user)
+    public function delImage($id)
     {
-        return $this->db->insert('users', $user);
-    }
-
-    public function editUser($user, $id)
-    {
-        return $this->db->update('users', $user, array('id'=>$id));
-    }
-
-    public function updateIP($id, $ip)
-    {
-        $this->db->query("update `imgloop` set `updated` = now(), `lastip` = '$ip' where `id` = $id");
-    }
-
-    public function delUser($id)
-    {
-        return $this->db->query("delete from `imgloop` where id = $id");
+        return $this->db->delete('imgloop', array('id' => $id));
     }
 
 }

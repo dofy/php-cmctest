@@ -19,16 +19,56 @@ class ImgloopController extends SevenController
         $this->view->assign('imgs', $this->Imgloop->getList());
     }
     
-    public function saveAction()
+    public function showAction()
     {
-        header('location: ?c=imgloop&m=ok');
+        $id   = intval(COMM::gets('id'));
+        $show = intval(COMM::gets('show')) == 0 ? 1 : 0;
+        
+        if($this->Imgloop->showImage($id, $show))
+        {
+            $this->view->assign('error', 0);
+            $this->view->assign('id', $id);
+            $this->view->assign('show', $show);
+        }
+        else
+        {
+            $this->view->assign('error', 1);
+            $this->view->assign('msg', '错误, 可能图片不存在.');
+        }
+    }
+    
+    public function addAction()
+    {
+        $url = COMM::gets('url');
+        
+        if($this->Imgloop->getImage($url))
+        {
+            $this->view->assign('error', 1);
+            $this->view->assign('msg', '图片已经存在.');
+        }
+        else
+        {
+            $id = $this->Imgloop->addImage($url);
+            
+            $this->view->assign('error', 0);
+            $this->view->assign('id', $id);
+            $this->view->assign('url', $url);
+        }
     }
 
     public function delAction()
     {
         $id = intval(COMM::gets('id'));
-        $this->Imgloop->delImg($id);
-        header('location: ?c=imgloop');
+        if($this->Imgloop->delImage($id))
+        {
+            $this->view->assign('error', 0);
+            $this->view->assign('id', $id);
+        }
+        else
+        {
+            $this->view->assign('error', 1);
+            $this->view->assign('msg', '错误, 可能图片不存在.');
+        }
     }
 
     public function beforeAction()
@@ -37,7 +77,6 @@ class ImgloopController extends SevenController
         {
             header('Location:?c=login');
         }
-        $this->view->assign('m', COMM::gets('m'));
     }
 }
 ?>

@@ -9,7 +9,7 @@
 {/if}
 <p >
 <div class="clear"></div>
-<form method="post" action="?c=user&a=savepass" onsubmit="return checkForm();">
+<form method="post" action="?c=user&a=savepass" onsubmit="return checkForm(this);">
  <p ><strong>修改密码:</strong></p>
  <p ><label for="npass">输入新密码:</label><input id="npass" type="password" name="npass" /></p>
  <p ><label for="rpass">确认新密码:</label><input id="rpass" type="password" name="rpass" /></p>
@@ -17,13 +17,11 @@
 </form>
 </p>
 </div>
-<script type="text/javascript">
+<script >
 <!--
 {literal}
-document.forms[0].npass.focus();
-function checkForm()
+function checkForm(frm)
 {
-    var frm = document.forms[0];
     if(frm.npass.value == '')
     {
         alert('请填写新密码.');
