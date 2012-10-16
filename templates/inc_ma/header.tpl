@@ -10,6 +10,8 @@
 <meta name="description" content="" />
 
 <link rel="stylesheet" href="css/grid.css" />
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/text.css" />
 <link rel="stylesheet" href="css/ma.css" />
 
 <script src="js/main.js" ></script>
