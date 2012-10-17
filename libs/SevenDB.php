@@ -7,13 +7,14 @@
  */
 class SevenDB
 {
-    public $recordcount = 0;
-    public $pagesize    = 20;
-    public $page        = 1;
-    public $pagecount   = 1;
+    private $recordcount = 0;
+    private $pagesize    = 20;
+    private $page        = 1;
+    private $pagecount   = 1;
 
-    public  $debug = false;
     private $last_sql;
+    
+    public  $debug = false;
 
     public function __construct($host, $user, $pass, $db = 'test', $charset = 'utf8')
     {
@@ -47,12 +48,12 @@ class SevenDB
         $vals = array();
         foreach($object as $key=>$val)
         {
-            array_push($keys, $key);
-            array_push($vals, $this->sqlstr($val));
+            $keys[] = $key;
+            $vals[] = is_string($val) ? "'" . $this->sqlstr($val) . "'" : $val;
         }
         $skey = join('`,`', $keys);
-        $sval = join("','", $vals);
-        $sql = "insert into `$table` (`$skey`) values ('$sval')";
+        $sval = join(",", $vals);
+        $sql = "insert into `$table` (`$skey`) values ($sval)";
         $this->query($sql);
         return mysql_insert_id();
     }
@@ -65,11 +66,11 @@ class SevenDB
         $whis = array();
         foreach($object as $key=>$val)
         {
-            array_push($objs, "`$key` = '".$this->sqlstr($val)."'");
+            $objs[] = "`$key`=" . (is_string($val) ? "'" . $this->sqlstr($val) . "'" : $val);
         }
         foreach($which as $key=>$val)
         {
-            array_push($whis, "`$key` = '".$this->sqlstr($val)."'");
+            $whis[] = "`$key`=" . (is_string($val) ? "'" . $this->sqlstr($val) . "'" : $val);
         }
         $sobj = join(',', $objs);
         $swhi = join(" and ", $whis);
@@ -84,7 +85,7 @@ class SevenDB
         $whis = array();
         foreach($which as $key=>$val)
         {
-            $whis[] = "`$key` = '" . $this->sqlstr($val) . "'";
+            $whis[] = "`$key`=" . (is_string($val) ? "'" . $this->sqlstr($val) . "'" : $val);
         }
         $swhi = join(" and ", $whis);
         $sql = "delete from `$table` where $swhi";
@@ -103,7 +104,7 @@ class SevenDB
         $result = $this->query($sql);
         while($row = mysql_fetch_assoc($result))
         {
-            array_push($arr_return, $row);
+            $arr_return[] = $row;
         }
         return $arr_return;
     }
@@ -143,7 +144,7 @@ class SevenDB
         $result = $this->query($sql . " limit $limit_begin, $limit_count");
         while($row = mysql_fetch_assoc($result))
         {
-            array_push($arr_return, $row);
+            $arr_return[] = $row;
         }
         return $arr_return;
     }

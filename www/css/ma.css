@@ -4,6 +4,9 @@ body, input, textarea, select {
 ul, li {
     list-style: none;
 }
+h2 {
+    padding: 20px 10px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
