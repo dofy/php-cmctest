@@ -8,11 +8,52 @@
 class SevenModule
 {
     protected $db;
+    protected $table;
     
-    public function __construct()
+    protected function __construct()
     {
-        $this->db = new SevenDB('', 'root', '', 'cmctest');
+        $this->db = new SevenDB('localhost', 'root', '', 'cmctest');
         //$this->db->debug = true;
+    }
+
+    protected function insert($object)
+    {
+        return $this->db->insert($this->table, $object);
+    }
+
+    protected function update($object, $which)
+    {
+        return $this->db->update($this->table, $object, $which);
+    }
+
+    protected function delete($which)
+    {
+        return $this->db->delete($this->table, $which);
+    }
+
+    protected function getAll($sql)
+    {
+        return $this->db->getAll($sql);
+    }
+
+    protected function getCount($key = 'id', $others = null)
+    {
+        return $this->db->getCount($this->table, $key, $others);
+    }
+
+    protected function getRows($sql, $page = 1, $pagesize = 20)
+    {
+        return $this->db->getRows($sql, $page, $pagesize);
+    }
+
+    protected function getOne($sql)
+    {
+        return $this->db->getOne($sql);
+    }
+
+    protected function pageInfo()
+    {
+        return $this->db->pageInfo();
     }
 }
 ?>

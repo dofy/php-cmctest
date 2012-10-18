@@ -17,10 +17,10 @@ class NewsController extends SevenController
     public function indexAction()
     {
         $page = COMM::gets('page', 1);
-        $this->view->assign('news', $this->News->getList($page));
+        $this->assign('news', $this->News->getList($page));
         
         $pager = new SevenPager($this->News->pageInfo());
-        $this->view->assign('page', $pager->createHtml('page'));
+        $this->assign('page', $pager->createHtml('page'));
     }
 
     public function editAction()
@@ -34,7 +34,7 @@ class NewsController extends SevenController
         {
             $news['updated'] = date('Y-m-d');
         }
-        $this->view->assign('news', $news);
+        $this->assign('news', $news);
     }
 
     public function delAction()
@@ -43,11 +43,11 @@ class NewsController extends SevenController
         
         if($this->News->delNews($id) > 0)
         {
-            $this->view->assign('msg', '新闻删除成功.');
+            $this->assign('msg', '新闻删除成功.');
         }
         else
         {
-            $this->view->assign('msg', '新闻删除失败, 可能新闻不存在.');
+            $this->assign('msg', '新闻删除失败, 可能新闻不存在.');
         }
     }
 
@@ -78,7 +78,7 @@ class NewsController extends SevenController
             header('Location:?c=login');
         }
 
-        $this->view->assign('m', COMM::gets('m'));
+        $this->assign('m', COMM::gets('m'));
     }
 }
 ?>

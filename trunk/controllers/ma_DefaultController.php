@@ -15,9 +15,9 @@ class DefaultController extends SevenController
 
     public function indexAction()
     {
-        $this->view->assign('user', $_SESSION['username']);
-        $this->view->assign('lastip', $_SESSION['lastip']);
-        $this->view->assign('updated', $_SESSION['updated']);
+        $this->assign('user', $_SESSION['username']);
+        $this->assign('lastip', $_SESSION['lastip']);
+        $this->assign('updated', $_SESSION['updated']);
     }
 
     public function beforeAction()

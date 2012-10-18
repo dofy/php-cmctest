@@ -10,31 +10,32 @@ class Imgloop extends SevenModule
     public function __construct()
     {
         parent::__construct();
+        $this->table = 'imgloop';
     }
     
     public function getList()
     {
-        return $this->db->getAll('select * from `imgloop`');
+        return $this->getAll("select * from $this->table");
     }
 
     public function addImage($url)
     {
-        return $this->db->insert('imgloop', array('url'=>$url));
+        return $this->insert(array('url'=>$url));
     }
     
     public function getImage($url)
     {
-        return $this->db->getCount('imgloop', 'id', "where url='$url'");
+        return $this->getCount('id', "where url='$url'");
     }
 
     public function showImage($id, $show)
     {
-        return $this->db->update('imgloop', array('show'=>$show), array('id'=>$id));
+        return $this->update(array('show'=>$show), array('id'=>$id));
     }
 
     public function delImage($id)
     {
-        return $this->db->delete('imgloop', array('id' => $id));
+        return $this->delete(array('id' => $id));
     }
 
 }
