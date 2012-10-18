@@ -13,7 +13,7 @@ class News extends SevenModule
         $this->table = 'news';
     }
     
-    public function getList($page = 1)
+    public function getList($page)
     {
         $this->getCount();
         return $this->getRows("select * from $this->table", $page);

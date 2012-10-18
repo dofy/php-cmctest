@@ -37,8 +37,8 @@ class SevenDB
     
     /**
      * 执行 insert 语句
-     * @param   String  $table      表明
-     * @param   String  $object     对象键值对数组
+     * @param   String  $table      表名
+     * @param   Array   $object     对象键值对数组
      * @return  int     insert_id   被插入记录的 id
      **/
     public function insert($table, $object)
@@ -58,7 +58,12 @@ class SevenDB
         return mysql_insert_id();
     }
 
-    
+    /**
+     * 更新数据
+     * @param   String  $table          表名
+     * @param   Array   $object         对象键值对数组
+     * @return  int     affected_rows   影响结果数
+     **/
     public function update($table, $object, $which)
     {
         if((!is_array($object)) || count($object) == 0 || (!is_array($which)) || count($which) == 0 ) return false;
@@ -79,6 +84,12 @@ class SevenDB
         return mysql_affected_rows();
     }
 
+    /**
+     * 删除数据
+     * @param   String  $table          表名
+     * @param   Array   $object         对象键值对数组
+     * @return  int     affected_rows   影响结果数
+     **/
     public function delete($table, $which)
     {
         if(!is_array($which) || count($which) == 0 ) return false;
@@ -126,9 +137,9 @@ class SevenDB
 
     /**
      * 获取指定记录(用于翻页)
-     * @param  string  $sql        要执行的 SQL 语句
-     * @param  int     $page       当前页
-     * @param  int     $pagesize   每页条数
+     * @param  string   $sql        要执行的 SQL 语句
+     * @param  int      $page       当前页
+     * @param  int      $pagesize   每页条数
      * @resutn 记录数组
      **/
     public function getRows($sql, $page = 1, $pagesize = 20)
@@ -151,7 +162,7 @@ class SevenDB
 
     /**
      * 取得一条记录
-     * @param  String $sql 要执行的 SQl 语句
+     * @param  String   $sql  要执行的 SQl 语句
      * @return 数据记录
      **/
     public function getOne($sql)
