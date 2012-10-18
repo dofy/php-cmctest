@@ -6,12 +6,12 @@
  * Update:  11/20/08
  */
 
-class managerController extends SevenController
+class ManagerController extends SevenController
 {
-    public function __construct($action)
+    public function __construct()
     {
         $this->models = array('manager');
-        parent::__construct($action);
+        parent::__construct();
     }
 
     public function indexAction()
@@ -20,14 +20,10 @@ class managerController extends SevenController
         $manager['level'] = 2;
         if($id > 0)
         {
-            $manager = $this->Manager->getmanager($id);
+            $manager = $this->Manager->getManager($id);
         }
         $this->assign('manager', $manager);
         $this->assign('managers', $this->Manager->getList());
-    }
-
-    public function chgpassAction()
-    {
     }
 
     public function savepassAction()

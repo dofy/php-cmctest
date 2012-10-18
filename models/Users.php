@@ -10,53 +10,54 @@ class Users extends SevenModule
     public function __construct()
     {
         parent::__construct();
+        $this-> = 'users';
     }
     
     public function checkUser($username, $password)
     {
-        $username = $this->db->sqlstr($username);
-        $password = $this->db->sqlstr($password);
-        return $this->db->getOne("select * from `users` where `username` = '$username' and `password` = md5('$password')");
+        $username = SevenDB::sqlstr($username);
+        $password = SevenDB::sqlstr($password);
+        return $this->getOne("select * from `users` where `username` = '$username' and `password` = md5('$password')");
     }
 
     public function savePass($pass)
     {
-        return $this->db->query("update `users` set `password` = md5('$pass') where `id` = $_SESSION[id]");
+        return $this->update(array('password' => md5($pass)), array('id' => $_SESSION[id]));
     }
     
     public function getList()
     {
-        return $this->db->getAll('select * from `users`');
+        return $this->getAll('select * from `users`');
     }
 
     public function getUser($id)
     {
-        return $this->db->getOne("select * from `users` where `id` = $id");
+        return $this->getOne("select * from `users` where `id` = $id");
     }
 
     public function getUserByName($username)
     {
-        return $this->db->getOne("select * from `users` where `username` = '" . $this->db->sqlstr($username) . "'");
+        return $this->getOne("select * from `users` where `username` = '" . $this->sqlstr($username) . "'");
     }
 
     public function addUser($user)
     {
-        return $this->db->insert('users', $user);
+        return $this->insert($user);
     }
 
     public function editUser($user, $id)
     {
-        return $this->db->update('users', $user, array('id'=>$id));
+        return $this->update($user, array('id'=>$id));
     }
 
     public function updateIP($id, $ip)
     {
-        $this->db->query("update `users` set `updated` = now(), `lastip` = '$ip' where `id` = $id");
+        $this->update(array('lastip' => $ip), array('id' => $id));
     }
 
     public function delUser($id)
     {
-        return $this->db->query("delete from `users` where id = $id");
+        return $this->delete(array('id' => $id));
     }
 
 }

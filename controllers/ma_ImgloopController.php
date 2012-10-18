@@ -8,10 +8,10 @@
 
 class ImgloopController extends SevenController
 {
-    public function __construct($action)
+    public function __construct()
     {
         $this->models = array('imgloop');
-        parent::__construct($action);
+        parent::__construct();
     }
 
     public function indexAction()

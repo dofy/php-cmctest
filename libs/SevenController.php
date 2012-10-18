@@ -10,11 +10,9 @@ class SevenController
 {
     protected $view;
     protected $models;
-    protected $action;
     
-    public function __construct($action)
+    public function __construct()
     {
-        $this->action = $action;
         if(count($this->models))
         {
             foreach($this->models as $model)

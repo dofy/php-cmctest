@@ -50,7 +50,7 @@ class SevenApplication
         
         // 判断类文件是否存在, 不存在, 报错
         if(!file_exists($cf))
-            die('类文件不存在: <em>' . $cf . '</em>');
+            die("类文件不存在: <em>$cf</em>");
         
         // 取 action
         if(isset($_REQUEST[$this->aflag]))
@@ -67,14 +67,16 @@ class SevenApplication
         
         // 类存在, 引入并创建类
         include($cf);
-        $this->controller = new $cn($a);
+        $this->controller = new $cn();
         
         // 判断方法是否存在, 不存在默认执行 index 方法
+        /*
         if(!method_exists($this->controller, $an))
         {
             $a  = 'index';
             $an = 'indexAction';
         }
+        */
         
         // 获取模板文件
         $tpl_file = $this->pre . strtolower($c) . __DS . $a . '.tpl';
@@ -87,11 +89,12 @@ class SevenApplication
         $this->controller->setView($this->view);
         // 执行 Action
         $this->controller->beforeAction();
-        $this->controller->$an();
+        if(method_exists($this->controller, $an))
+            $this->controller->$an();
         $this->controller->afterAction();
         
         // 渲染模板
-        @$this->view->display($tpl_file);
+        $this->view->display($tpl_file);
     }
 }
 ?>

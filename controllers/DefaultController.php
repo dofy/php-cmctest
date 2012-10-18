@@ -8,10 +8,10 @@
 
 class DefaultController extends SevenController
 {
-    public function __construct($action)
+    public function __construct()
     {
         $this->models = array('news');
-        parent::__construct($action);
+        parent::__construct();
     }
 
     public function indexAction()

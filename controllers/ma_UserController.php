@@ -8,10 +8,10 @@
 
 class UserController extends SevenController
 {
-    public function __construct($action)
+    public function __construct()
     {
         $this->models = array('users');
-        parent::__construct($action);
+        parent::__construct();
     }
 
     public function indexAction()
