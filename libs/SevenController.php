@@ -29,13 +29,21 @@ class SevenController
             }
         }
     }
-    
+
     /**
      * 设定 view
      **/
     public function setView($view)
     {
         $this->view = $view;
+    }
+    
+    /**
+     * 绑定模板变量
+     */
+    public function assign($key, $value)
+    {
+        $this->view->assign($key, $value);
     }
     
     /**

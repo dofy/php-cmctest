@@ -10,7 +10,7 @@ class LoginController extends SevenController
 {
     public function __construct($action)
     {
-        $this->models = array('users');
+        $this->models = array('manager');
         parent::__construct($action);
     }
 
@@ -22,10 +22,10 @@ class LoginController extends SevenController
     {
         $username = COMM::posts('username');
         $password = COMM::posts('password');
-        $user = $this->Users->checkUser($username, $password);
+        $user = $this->Manager->checkManager($username, $password);
         if($user)
         {
-            $this->Users->updateIp($user['id'], $_SERVER['REMOTE_ADDR']);
+            $this->Manager->updateIp($user['id'], $_SERVER['REMOTE_ADDR']);
             
             $_SESSION['islogin']  = true;
             $_SESSION['lastip']   = $user['lastip'];
@@ -39,7 +39,7 @@ class LoginController extends SevenController
         else
         {
             $_SESSION['islogin'] = false;
-            $this->view->assign('msg', '登录失败.');
+            $this->assign('msg', '登录失败.');
         }
     }
     

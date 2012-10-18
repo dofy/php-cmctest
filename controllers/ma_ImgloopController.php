@@ -16,7 +16,7 @@ class ImgloopController extends SevenController
 
     public function indexAction()
     {
-        $this->view->assign('imgs', $this->Imgloop->getList());
+        $this->assign('imgs', $this->Imgloop->getList());
     }
     
     public function showAction()
@@ -26,14 +26,14 @@ class ImgloopController extends SevenController
         
         if($this->Imgloop->showImage($id, $show))
         {
-            $this->view->assign('error', 0);
-            $this->view->assign('id', $id);
-            $this->view->assign('show', $show);
+            $this->assign('error', 0);
+            $this->assign('id', $id);
+            $this->assign('show', $show);
         }
         else
         {
-            $this->view->assign('error', 1);
-            $this->view->assign('msg', '错误, 可能图片不存在.');
+            $this->assign('error', 1);
+            $this->assign('msg', '错误, 可能图片不存在.');
         }
     }
     
@@ -43,16 +43,16 @@ class ImgloopController extends SevenController
         
         if($this->Imgloop->getImage($url))
         {
-            $this->view->assign('error', 1);
-            $this->view->assign('msg', '图片已经存在.');
+            $this->assign('error', 1);
+            $this->assign('msg', '图片已经存在.');
         }
         else
         {
             $id = $this->Imgloop->addImage($url);
             
-            $this->view->assign('error', 0);
-            $this->view->assign('id', $id);
-            $this->view->assign('url', $url);
+            $this->assign('error', 0);
+            $this->assign('id', $id);
+            $this->assign('url', $url);
         }
     }
 
@@ -61,13 +61,13 @@ class ImgloopController extends SevenController
         $id = intval(COMM::gets('id'));
         if($this->Imgloop->delImage($id))
         {
-            $this->view->assign('error', 0);
-            $this->view->assign('id', $id);
+            $this->assign('error', 0);
+            $this->assign('id', $id);
         }
         else
         {
-            $this->view->assign('error', 1);
-            $this->view->assign('msg', '错误, 可能图片不存在.');
+            $this->assign('error', 1);
+            $this->assign('msg', '错误, 可能图片不存在.');
         }
     }
 

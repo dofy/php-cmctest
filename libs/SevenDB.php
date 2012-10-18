@@ -27,7 +27,7 @@ class SevenDB
      * 执行 SQL 语句
      * @param String $sql 要执行的 SQl 语句
      **/
-    public function query($sql)
+    private function query($sql)
     {
         if($this->debug)
             echo '<pre>-- ' . $sql . '</pre>';
@@ -176,7 +176,7 @@ class SevenDB
      * 过滤 SQL 敏感字符
      * @param string $str 过滤字符
      **/
-    public function sqlstr($str)
+    static public function sqlstr($str)
     {
         return addslashes($str);
     }

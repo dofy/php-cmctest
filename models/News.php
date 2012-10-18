@@ -10,37 +10,38 @@ class News extends SevenModule
     public function __construct()
     {
         parent::__construct();
+        $this->table = 'news';
     }
     
     public function getList($page = 1)
     {
-        $this->db->getCount('news');
-        return $this->db->getRows("select * from news", $page);
+        $this->getCount();
+        return $this->getRows("select * from $this->table", $page);
     }
 
     public function getNews($id)
     {
-        return $this->db->getOne("select * from news where id=$id");
+        return $this->getOne("select * from $this->table where id=$id");
     }
 
     public function addNews($news)
     {
-        return $this->db->insert('news', $news);
+        return $this->insert($news);
     }
 
     public function editNews($news, $id)
     {
-        return $this->db->update('news', $news, array('id'=>$id));
+        return $this->update($news, array('id'=>$id));
     }
 
     public function delNews($id)
     {
-        return $this->db->delete('news', array('id'=>$id));
+        return $this->delete(array('id'=>$id));
     }
     
     public function pageInfo()
     {
-        return $this->db->pageInfo();
+        return parent::pageInfo();
     }
 }
 

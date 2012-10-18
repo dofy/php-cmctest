@@ -6,24 +6,24 @@
  * Update:  11/20/08
  */
 
-class UserController extends SevenController
+class managerController extends SevenController
 {
     public function __construct($action)
     {
-        $this->models = array('users');
+        $this->models = array('manager');
         parent::__construct($action);
     }
 
     public function indexAction()
     {
-        $userid = intval(COMM::gets('id'));
-        $user['level'] = 2;
-        if($userid > 0)
+        $id = intval(COMM::gets('id'));
+        $manager['level'] = 2;
+        if($id > 0)
         {
-            $user = $this->Users->getUser($userid);
+            $manager = $this->Manager->getmanager($id);
         }
-        $this->assign('user', $user);
-        $this->assign('users', $this->Users->getList());
+        $this->assign('manager', $manager);
+        $this->assign('managers', $this->Manager->getList());
     }
 
     public function chgpassAction()
@@ -33,42 +33,42 @@ class UserController extends SevenController
     public function savepassAction()
     {
         $pass = COMM::posts('npass');
-        $this->Users->savePass($pass);
-        header('location: ?c=user&a=chgpass&m=ok');
+        $this->Manager->savePass($pass);
+        header('location: ?c=manager&a=chgpass&m=ok');
     }
 
     public function saveAction()
     {
-        $id = intval(COMM::posts('userid'));
+        $id = intval(COMM::posts('id'));
         if($id <= 0 || COMM::posts('password') != '')
             $k['password'] = md5(COMM::posts('password'));
         if($id <= 0)
         {
             $k['level'] = 2;//COMM::posts('level');
             // add
-            $has = $this->Users->getUserByName(COMM::posts('username'));
+            $has = $this->Manager->getManagerByName(COMM::posts('username'));
             if(is_array($has))
             {
-                header('location: ?c=user&m=name');
+                header('location: ?c=manager&m=name');
                 return;
             }
             $k['username'] = COMM::posts('username');
-            $this->Users->addUser($k);
+            $this->Manager->addManager($k);
 
         }
         else
         {
             // update
-            $this->Users->editUser($k, $id);
+            $this->Manager->editManager($k, $id);
         }
-        header('location: ?c=user&m=ok');
+        header('location: ?c=manager&m=ok');
     }
 
     public function delAction()
     {
         $id = intval(COMM::gets('id'));
-        $this->Users->delUser($id);
-        header('location: ?c=user');
+        $this->Manager->delManager($id);
+        header('location: ?c=manager');
     }
 
     public function beforeAction()
