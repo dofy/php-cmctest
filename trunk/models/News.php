@@ -16,7 +16,7 @@ class News extends SevenModule
     public function getList($page)
     {
         $this->getCount();
-        return $this->getRows("select * from $this->table", $page);
+        return $this->getRows("select * from $this->table order by updated desc", $page);
     }
 
     public function getNews($id)
