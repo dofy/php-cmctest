@@ -18,11 +18,9 @@ class UserController extends SevenController
     {
         $page = COMM::gets('page', 1);
         $this->assign('users', $this->Users->getList());
-    }
-
-    public function chgpassAction()
-    {
-
+        
+        $pager = new SevenPager($this->Users->pageInfo());
+        $this->assign('page', $pager->createHtml('page'));
     }
 
     public function savepassAction()

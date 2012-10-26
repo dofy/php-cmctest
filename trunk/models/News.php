@@ -38,11 +38,6 @@ class News extends SevenModule
     {
         return $this->delete(array('id'=>$id));
     }
-    
-    public function pageInfo()
-    {
-        return parent::pageInfo();
-    }
 }
 
 ?>

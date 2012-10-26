@@ -10,7 +10,7 @@ class Message extends SevenModule
     public function __construct()
     {
         parent::__construct();
-        $this-> = 'message';
+        $this->table = 'message';
     }
 
     public function getList($page)

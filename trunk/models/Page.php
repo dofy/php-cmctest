@@ -10,7 +10,7 @@ class Page extends SevenModule
     public function __construct()
     {
         parent::__construct();
-        $this-> = 'page';
+        $this->table = 'page';
     }
 
     public function getPage($id)
