@@ -44,5 +44,10 @@ class Message extends SevenModule
         return $this->delete(array('id' => $id));
     }
 
+    public function delMyMessage($uid)
+    {
+        return $this->delete(array('uid' => $uid));
+    }
+
 }
 ?>

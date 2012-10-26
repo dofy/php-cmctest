@@ -10,24 +10,19 @@ class UserController extends SevenController
 {
     public function __construct()
     {
-        $this->models = array('users');
+        $this->models = array('users', 'message');
         parent::__construct();
     }
 
     public function indexAction()
     {
-        $userid = intval(COMM::gets('id'));
-        $user['level'] = 2;
-        if($userid > 0)
-        {
-            $user = $this->Users->getUser($userid);
-        }
-        $this->assign('user', $user);
+        $page = COMM::gets('page', 1);
         $this->assign('users', $this->Users->getList());
     }
 
     public function chgpassAction()
     {
+
     }
 
     public function savepassAction()
@@ -39,12 +34,19 @@ class UserController extends SevenController
 
     public function saveAction()
     {
-        $id = intval(COMM::posts('userid'));
-        if($id <= 0 || COMM::posts('password') != '')
-            $k['password'] = md5(COMM::posts('password'));
+        $id = intval(COMM::posts('id'));
+
+        $k['password'] = md5(COMM::posts('password'));
+        $k['name']     = md5(COMM::posts('name'));
+        $k['email']    = md5(COMM::posts('email'));
+        $k['tel']      = md5(COMM::posts('tel'));
+        $k['province'] = md5(COMM::posts('province'));
+        $k['city']     = md5(COMM::posts('city'));
+        $k['sex']      = md5(COMM::posts('sex'));
+        $k['joinin']   = now();
+
         if($id <= 0)
         {
-            $k['level'] = 2;//COMM::posts('level');
             // add
             $has = $this->Users->getUserByName(COMM::posts('username'));
             if(is_array($has))
@@ -54,7 +56,6 @@ class UserController extends SevenController
             }
             $k['username'] = COMM::posts('username');
             $this->Users->addUser($k);
-
         }
         else
         {
@@ -68,6 +69,7 @@ class UserController extends SevenController
     {
         $id = intval(COMM::gets('id'));
         $this->Users->delUser($id);
+        $this->Message->delMyMessage($id);
         header('location: ?c=user');
     }
 
@@ -78,7 +80,6 @@ class UserController extends SevenController
             header('Location:?c=login');
         }
         $this->assign('m', COMM::gets('m'));
-        $this->assign('level_opt', array(1=>'管理员', 2=>'普通用户'));
     }
 }
 ?>
