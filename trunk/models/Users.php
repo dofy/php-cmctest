@@ -27,7 +27,8 @@ class Users extends SevenModule
     
     public function getList()
     {
-        return $this->getAll("select * from $this->table");
+        $this->getCount();
+        return $this->getRows("select * from $this->table");
     }
 
     public function getUser($id)
@@ -50,9 +51,9 @@ class Users extends SevenModule
         return $this->update($user, array('id'=>$id));
     }
 
-    public function updateIP($id, $ip)
+    public function updateIP($id, $ip, $times)
     {
-        $this->update(array('lastip' => $ip), array('id' => $id));
+        return $this->update(array('lastip'=>$ip, 'times'=>$times+1), array('id' => $id));
     }
 
     public function delUser($id)
