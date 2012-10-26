@@ -13,7 +13,7 @@ class SevenModule
     protected function __construct()
     {
         $this->db = new SevenDB('localhost', 'root', '', 'cmctest');
-        $this->db->debug = true;
+        //$this->db->debug = true;
     }
 
     protected function insert($object)
@@ -51,7 +51,7 @@ class SevenModule
         return $this->db->getOne($sql);
     }
 
-    protected function pageInfo()
+    public function pageInfo()
     {
         return $this->db->pageInfo();
     }

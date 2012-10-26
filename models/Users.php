@@ -10,7 +10,7 @@ class Users extends SevenModule
     public function __construct()
     {
         parent::__construct();
-        $this-> = 'users';
+        $this->table = 'users';
     }
     
     public function checkUser($username, $password)

@@ -10,7 +10,7 @@ class Product extends SevenModule
     public function __construct()
     {
         parent::__construct();
-        $this-> = 'product';
+        $this->table = 'product';
     }
 
     public function getList($page)
