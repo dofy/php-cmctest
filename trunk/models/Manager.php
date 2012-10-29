@@ -43,22 +43,22 @@ class Manager extends SevenModule
 
     public function addManager($manager)
     {
-        return $this->insert($this->table, $manager);
+        return $this->insert($manager);
     }
 
     public function editManager($manager, $id)
     {
-        return $this->update($this->table, $manager, array('id'=>$id));
+        return $this->update($manager, array('id'=>$id));
     }
 
     public function updateIP($id, $ip)
     {
-        $this->query("update $this->table set `updated` = now(), `lastip` = '$ip' where `id` = $id");
+        return $this->update(array('updated' => 'now()', 'lastip' => $ip), array('id' => $id));
     }
 
     public function delManager($id)
     {
-        return $this->query("delete from $this->table where id = $id");
+        return $this->delete(array('id' => $id));
     }
 
 }

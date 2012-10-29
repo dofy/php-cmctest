@@ -41,7 +41,7 @@
      <td>{$item.lastip}</td>
      <td class="text_center" >
         <a href="?c=manager&id={$item.id}" >编辑</a>
-        {if $item.id == 2}
+        {if $item.level == 2}
         | <a href="?c=manager&a=del&id={$item.id}" onclick="return confirm('确定要删除该管理员吗?');">删除</a>
         {/if}
      </td>

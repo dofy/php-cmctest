@@ -50,7 +50,6 @@ class ManagerController extends SevenController
             }
             $k['username'] = COMM::posts('username');
             $this->Manager->addManager($k);
-
         }
         else
         {

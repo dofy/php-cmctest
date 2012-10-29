@@ -49,7 +49,7 @@ class SevenDB
         foreach($object as $key=>$val)
         {
             $keys[] = $key;
-            $vals[] = is_string($val) ? "'" . $this->sqlstr($val) . "'" : $val;
+            $vals[] = $this->makeValue($val);
         }
         $skey = join('`,`', $keys);
         $sval = join(",", $vals);
@@ -71,11 +71,11 @@ class SevenDB
         $whis = array();
         foreach($object as $key=>$val)
         {
-            $objs[] = "`$key`=" . (is_string($val) ? "'" . $this->sqlstr($val) . "'" : $val);
+            $objs[] = "`$key`=" . $this->makeValue($val);
         }
         foreach($which as $key=>$val)
         {
-            $whis[] = "`$key`=" . (is_string($val) ? "'" . $this->sqlstr($val) . "'" : $val);
+            $whis[] = "`$key`=" . $this->makeValue($val);
         }
         $sobj = join(',', $objs);
         $swhi = join(" and ", $whis);
@@ -96,7 +96,7 @@ class SevenDB
         $whis = array();
         foreach($which as $key=>$val)
         {
-            $whis[] = "`$key`=" . (is_string($val) ? "'" . $this->sqlstr($val) . "'" : $val);
+            $whis[] = "`$key`=" . $this->makeValue($val);
         }
         $swhi = join(" and ", $whis);
         $sql = "delete from `$table` where $swhi";
@@ -190,6 +190,25 @@ class SevenDB
     static public function sqlstr($str)
     {
         return addslashes($str);
+    }
+
+    private function makeValue($value)
+    {
+        if(is_string($value))
+        {
+            if(strtolower($value) == 'now()')
+            {
+                return 'now()';
+            }
+            else
+            {
+                return "'" . $this->sqlstr($value) . "'";
+            }
+        }
+        else
+        {
+            return $value;
+        }
     }
 
     /**
