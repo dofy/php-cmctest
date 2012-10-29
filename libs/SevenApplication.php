@@ -94,7 +94,7 @@ class SevenApplication
         $this->controller->afterAction();
         
         // 渲染模板
-        $this->view->display($tpl_file);
+        @$this->view->display($tpl_file);
     }
 }
 ?>
