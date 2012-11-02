@@ -4,74 +4,38 @@
 
 <div id="content" class="grid_10">
     {include file="inc_ma/cat.tpl"}
-    {if $m == 'ok'}
-    <p class="msg" >用户信息保存成功.</p>
-    {elseif $m == 'name'}
-    <p class="msg" >用户已经存在.</p>
-    {/if}
-    <div class="clear"></div>
-    <form method="post" action="?c=user&a=save" onsubmit="return checkForm(this);">
-    <strong>{if $user.id > 0}修改{else}添加{/if}用户:</strong>
-     <label for="username">用户名:</label><input id="username" type="text" name="username" value="{$user.username}" {if $user.id>0}readonly="readonly"{/if} />
-     <label for="password">密码:</label><input id="password" type="text" name="password" />
-     <!--
-     <label>权限:</label>
-        {html_radios name="level" options=$level_opt selected=$user.level}
-        -->
-     <input type="hidden" name="userid" value="{$user.id}" />
-     <input type="submit" value="保存" />
-     <input type="button" value="取消" onclick="location.href='?c=user';" />
-    </form>
-    <p >
+  <div class="clear"></div>
+    {foreach from=$users item='user'}
+
     <table>
     <tr>
-    <th>ID</th>
-    <th>用户名</th>
-    <!--th>用户组</th-->
-    <th>最后登录时间</th>
-    <th>最后登录IP</th>
-    <th>编辑</th>
+        <th class="text_right" >ID: {$user.id}</th>
+        <td>
+            <a href="?c=user&a=del&id={$user.id}" onclick="return confirm('确定要删除该用户吗?');">删除</a>
+        </td>
+        <th>UserName:</th>
+        <td>{$user.username}</td>
+        <th>注册时间:</th>
+        <td>{$user.joinin}</td>
+        <th>最后登录/次/IP:</th>
+        <td>{$user.updated|default:'未登录'}/{$user.times}/{$user.lastip}</td>
     </tr>
-    {foreach from=$users item='user'}
     <tr>
-     <td class="text_right" >{$user.id}</td>
-     <td>{$user.username}</td>
-     <!--td>{$level_opt[$user.level]}</td-->
-     <td>{$user.updated}</td>
-     <td>{$user.lastip}</td>
-     <td class="text_center" >
-        <a href="?c=user&id={$user.id}" >编辑</a>
-        {if $user.id == 2}
-        | <a href="?c=user&a=del&id={$user.id}" onclick="return confirm('确定要删除该用户吗?');">删除</a>
-        {/if}
-     </td>
+        <th>EMail:</th>
+        <td>{$user.email}</td>
+        <th>电话:</th>
+        <td>{$user.tel}</td>
+        <th>省份:</th>
+        <td>{$user.province}</td>
+        <th>城市:</th>
+        <td>{$user.city}</td>
     </tr>
-    {/foreach}
     </table>
+    {foreachelse}
+    还没有用户注册...
+    {/foreach}
     
-    </p>
+    {$page}
 </div>
 
-<script >
-<!--
-{literal}
-function checkForm(frm)
-{
-    if($.trim(frm.username.value) == '')
-    {
-        alert('请填写用户名.');
-        frm.username.focus();
-        return false;
-    }
-    if(frm.password.value == '' && frm.userid.value == '')
-    {
-        alert('请填写密码.');
-        frm.password.focus();
-        return false;
-    }
-
-}
-{/literal}
-//-->
-</script>
 {include file="inc_ma/footer.tpl"}
