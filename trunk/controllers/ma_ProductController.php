@@ -28,25 +28,23 @@ class ProductController extends SevenController
         $id = intval(COMM::gets('id', 0));
         if($id > 0)
         {
-            $news = $this->Product->getNews($id);
+            $product = $this->Product->getProduct($id);
         }
-        else
-        {
-            $news['updated'] = date('Y-m-d');
-        }
-        $this->assign('product', $news);
+        $this->assign('product', $product);
     }
 
     public function delAction()
     {
         $id = intval(COMM::gets('id', 0));
         
-        if($this->Product->delNews($id) > 0)
+        if($this->Product->delProduct($id) > 0)
         {
-            $this->assign('msg', '产品删除成功.');
+            $this->assign('error', 0);
+            $this->assign('id', $id);
         }
         else
         {
+            $this->assign('error', 1);
             $this->assign('msg', '产品删除失败, 可能产品不存在.');
         }
     }
@@ -55,7 +53,7 @@ class ProductController extends SevenController
     {
         $id = intval(COMM::posts('id'));
 
-        $k['cid'] = COMM::posts('cid');
+        $k['cid'] = COMM::posts('cid', 1);
         $k['url'] = COMM::posts('url');
         $k['title'] = COMM::posts('title');
         $k['content'] = COMM::posts('content');
@@ -67,7 +65,7 @@ class ProductController extends SevenController
         else
         {
             // update
-            $this->Product->editNews($k, $id);
+            $this->Product->editProduct($k, $id);
         }
         header('Location:?c=product&m=ok');
     }

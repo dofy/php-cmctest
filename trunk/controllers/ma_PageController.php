@@ -16,7 +16,8 @@ class PageController extends SevenController
 
     public function indexAction()
     {
-        $id = COMM::gets('id');
+        $id = COMM::gets('id', 1);
+        $this->assign('id', $id);
         $this->assign('page', $this->Page->getPage($id));
     }
 
@@ -25,10 +26,16 @@ class PageController extends SevenController
         $id = intval(COMM::posts('id'));
 
         $content = COMM::posts('content');
+        if($this->Page->getPage($id))
+        {
+            $this->Page->editPage($content, $id);
+        }
+        else
+        {
+            $this->Page->addPage($content, $id);
+        }
 
-        $this->Page->editPage($content, $id);
-
-        header('Location:?c=page&m=ok');
+        header("Location:?c=page&id=$id&m=ok");
     }
 
     public function beforeAction()
@@ -38,7 +45,7 @@ class PageController extends SevenController
             header('Location:?c=login');
         }
 
-        $this->assign('ids', array('关于我们', '招聘信息'));
+        $this->assign('ids', array(1 => '关于我们', '招聘信息'));
         $this->assign('m', COMM::gets('m'));
     }
 }

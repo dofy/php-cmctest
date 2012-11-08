@@ -18,6 +18,11 @@ class Page extends SevenModule
         return $this->getOne("select * from $this->table where `id` = $id");
     }
 
+    public function addPage($content, $id)
+    {
+        return $this->insert(array('id'=>$id, 'content'=>$content));
+    }
+
     public function editPage($content, $id)
     {
         return $this->update(array('content'=>$content), array('id'=>$id));
