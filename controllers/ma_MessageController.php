@@ -17,7 +17,7 @@ class MessageController extends SevenController
     public function indexAction()
     {
         $page = COMM::gets('page', 1);
-        $this->assign('message', $this->Message->getList($page));
+        $this->assign('messages', $this->Message->getList($page));
         
         $pager = new SevenPager($this->Message->pageInfo());
         $this->assign('page', $pager->createHtml('page'));

@@ -5,8 +5,8 @@
 <div id="content" class="grid_10">
     {include file="inc_ma/cat.tpl"}
   <div class="clear"></div>
+  
     {foreach from=$users item='user'}
-
     <table>
     <tr>
         <th class="text_right" >ID: {$user.id}</th>

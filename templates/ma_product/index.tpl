@@ -53,14 +53,18 @@
     </script>
     {/literal}
 
-    <div class="grid_2 push_1" >
-        <p ><a href="?c=product&a=edit" >添加产品</a></p>
+    <div class="grid_4 push_1" >
+        产品分类: 
+        <select name="cid" onchange="location.href='?c=product&cid=' + this.value;" >
+        {html_options options=$ids selected=$cid}
+        </select>
+        <a href="?c=product&a=edit&cid={$cid}" >添加产品</a>
     </div>
 
     <ul id="imgbox" class="grid_10" >
     {foreach from=$product item='item'}
     <li id="img_{$item.id}" data-id="{$item.id}" class="box" >
-        <a href="?c=product&a=edit&id={$item.id}" ><img src="{$item.url}" height="100" /></a>
+        <a href="?c=product&a=edit&cid={$item.cid}&id={$item.id}" ><img src="{$item.url}" height="100" /></a>
         <div >{$item.title}</div>
     </li>
     {foreachelse}

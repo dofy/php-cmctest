@@ -13,10 +13,10 @@ class Product extends SevenModule
         $this->table = 'product';
     }
 
-    public function getList($page)
+    public function getList($page, $cid)
     {
         $this->getCount();
-        return $this->getRows("select * from $this->table order by `updated` desc", $page);
+        return $this->getRows("select * from $this->table where `cid` = $cid order by `updated` desc", $page);
     }
 
     public function getProduct($id)

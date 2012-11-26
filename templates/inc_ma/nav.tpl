@@ -1,5 +1,6 @@
 <div id="nav" class="grid_2">
     <ul>
+        <li><a href="?">管理首页</a></li>
         <li><a href="?c=news">新闻管理</a></li>
         <li><a href="?c=imgloop">轮播图片</a></li>
         <li><a href="?c=page">静态页面</a></li>
