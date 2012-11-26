@@ -4,31 +4,38 @@
 
 <div id="content" class="grid_10">
     {include file="inc_ma/cat.tpl"}
-    
+  <div class="clear"></div>
+  
+    {foreach from=$messages item='message'}
     <table>
     <tr>
-    <th>ID</th>
-    <th>标题</th>
-    <th>内容</th>
-    <th>日期</th>
-    <th>编辑</th>
-    </tr>
-    {foreach from=$message item='item'}
-    <tr>
-        <td class="text_right" >{$item.id}</td>
-        <td>{$item.title}</td>
-        <td>{$item.content|truncate:40:"...":false:true|escape:"html"}</td>
-        <td>{$item.updated}</td>
-        <td class="text_center" >
-        <a href="?c=news&a=edit&id={$item.id}" >回复</a> | 
-        <a href="?c=news&a=del&id={$item.id}" onclick="return confirm('确定要删除该新闻吗?');">删除</a>
+        <th class="text_right" >ID: {$message.id}</th>
+        <td>
+            <a href="?c=user&a=del&id={$message.id}" onclick="return confirm('确定要删除该留言吗?');">删除</a>
         </td>
+        <th>UserName:</th>
+        <td>{$message.username}</td>
+        <th>注册时间:</th>
+        <td>{$message.joinin}</td>
+        <th>最后登录/次/IP:</th>
+        <td>{$message.updated|default:'未登录'}/{$message.times}/{$message.lastip}</td>
     </tr>
-    {/foreach}
+    <tr>
+        <th>EMail:</th>
+        <td>{$message.email}</td>
+        <th>电话:</th>
+        <td>{$message.tel}</td>
+        <th>省份:</th>
+        <td>{$message.province}</td>
+        <th>城市:</th>
+        <td>{$message.city}</td>
+    </tr>
     </table>
+    {foreachelse}
+    还没有用户留言...
+    {/foreach}
     
-    <div id="page">{$page}</div>
-    
+    {$page}
 </div>
 
 {include file="inc_ma/footer.tpl"}

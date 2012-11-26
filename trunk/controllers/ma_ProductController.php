@@ -17,7 +17,10 @@ class ProductController extends SevenController
     public function indexAction()
     {
         $page = COMM::gets('page', 1);
-        $this->assign('product', $this->Product->getList($page));
+        $cid = COMM::gets('cid', 1);
+        
+        $this->assign('cid', $cid);
+        $this->assign('product', $this->Product->getList($page, $cid));
         
         $pager = new SevenPager($this->Product->pageInfo());
         $this->assign('page', $pager->createHtml('page'));
@@ -26,6 +29,8 @@ class ProductController extends SevenController
     public function editAction()
     {
         $id = intval(COMM::gets('id', 0));
+        $this->assign('cid', COMM::gets('cid', 1));
+        
         if($id > 0)
         {
             $product = $this->Product->getProduct($id);
@@ -57,6 +62,7 @@ class ProductController extends SevenController
         $k['url'] = COMM::posts('url');
         $k['title'] = COMM::posts('title');
         $k['content'] = COMM::posts('content');
+        
         if($id <= 0)
         {
             // add
@@ -67,7 +73,7 @@ class ProductController extends SevenController
             // update
             $this->Product->editProduct($k, $id);
         }
-        header('Location:?c=product&m=ok');
+        header("Location:?c=product&cid=" . $k['cid'] . "&m=ok");
     }
 
     public function beforeAction()
@@ -76,7 +82,8 @@ class ProductController extends SevenController
         {
             header('Location:?c=login');
         }
-
+        
+        $this->assign('ids', array(1 => '产品分类1', '产品分类2'));
         $this->assign('m', COMM::gets('m'));
     }
 }

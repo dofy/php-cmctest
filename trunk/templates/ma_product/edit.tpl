@@ -35,18 +35,18 @@
     {
         if($.trim(frm.title.value) == '')
         {
-            alert('请填写商品名称.');
+            alert('请填写产品名称.');
             frm.title.focus();
             return false;
         }
         if(frm.url.value == '')
         {
-            alert('请上传商品图片.');
+            alert('请上传产品图片.');
             return false;
         }
         if(editor.isEmpty())
         {
-            alert('请填写商品描述.');
+            alert('请填写产品描述.');
             editor.focus();
             return false;
         }
@@ -56,13 +56,15 @@
     {/literal}
     <div class="clear" ></div>
     <form method="post" action="?c=product&a=save" onsubmit="return checkForm(this);" >
-        <p >名称: <input type="text" name="title" size="40" value="{$product.title}" /></p>
-        <div class="grid_6 alpha" ><textarea name="content" rows="17" cols="50" >{$product.content|escape:"html"}</textarea></div>
-        <div class="grid_4 omega" ><img id="img_upload" src="{$product.url|default:'images/img.png'}" width="200" /></div>
+        <p >产品分类: 
+        <select name="cid" >{html_options options=$ids selected=$cid}</select>
+        名称: <input type="text" name="title" size="40" value="{$product.title}" /></p>
+        <div class="grid_7 alpha" ><textarea name="content" rows="17" cols="60" >{$product.content|escape:"html"}</textarea></div>
+        <div class="grid_3 omega" ><img id="img_upload" src="{$product.url|default:'images/img.png'}" width="200" /></div>
         <div class="clear" ></div>
         <p >
             <input type="submit" value="保存" />
-            <input type="button" value="取消" onclick="location.href='?c=product'" />
+            <input type="button" value="取消" onclick="location.href='?c=product&cid={$cid}'" />
             <input type="hidden" name="id" value="{$product.id}"/>
             <input id="form_url" type="hidden" name="url" value="{$product.url}"/>
         </p>

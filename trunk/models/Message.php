@@ -16,7 +16,7 @@ class Message extends SevenModule
     public function getList($page)
     {
         $this->getCount();
-        return $this->getRows("select * from $this->table order by updated desc", $page);
+        return $this->getRows("select m.*, u.username from `$this->table` as m left join `users` as u on m.uid = u.id order by updated desc", $page);
     }
 
     public function getMyMessage($uid)
