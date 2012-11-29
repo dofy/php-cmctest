@@ -30,7 +30,7 @@
     <div class="clear" ></div>
     <form method="post" action="?c=news&a=save" onsubmit="return checkForm(this);" >
         <p >标题: <input type="text" name="title" size="40" value="{$news.title}" />
-        时间: {html_select_date start_year="-5" month_format="%m月" time=$news.updated}</p>
+        时间: {html_select_date start_year="-5" time=$news.updated}</p>
         <p ><textarea name="content" rows="17" cols="77" >{$news.content|escape:"html"}</textarea></p>
         <p >
             <input type="submit" value="保存" />

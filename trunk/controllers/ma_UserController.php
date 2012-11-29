@@ -35,12 +35,14 @@ class UserController extends SevenController
         $id = intval(COMM::posts('id'));
 
         $k['password'] = md5(COMM::posts('password'));
-        $k['name']     = md5(COMM::posts('name'));
-        $k['email']    = md5(COMM::posts('email'));
-        $k['tel']      = md5(COMM::posts('tel'));
-        $k['province'] = md5(COMM::posts('province'));
-        $k['city']     = md5(COMM::posts('city'));
-        $k['sex']      = md5(COMM::posts('sex'));
+        $k['name']     = COMM::posts('name');
+        $k['email']    = COMM::posts('email');
+        $k['tel']      = COMM::posts('tel');
+        $k['province'] = COMM::posts('province');
+        $k['city']     = COMM::posts('city');
+        $k['addr']     = COMM::posts('addr');
+        $k['postcode'] = COMM::posts('postcode');
+        $k['sex']      = COMM::posts('sex');
         $k['joinin']   = now();
 
         if($id <= 0)
