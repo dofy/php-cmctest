@@ -24,6 +24,8 @@ class SevenView extends Smarty
         $this->setConfigDir(dirname(__FILE__) . '/../configs/');
         $this->setCacheDir(dirname(__FILE__) . '/../cache/');
         
+        //$this->caching = true;
+
         //$this->debugging = true;
 	}
 }

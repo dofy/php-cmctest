@@ -16,17 +16,7 @@ class DefaultController extends SevenController
 
     public function indexAction()
     {
-        echo 'index test';
-    }
-
-    public function tttAction()
-    {
-        echo 'ttt action';
-    }
-
-    public function beforeAction()
-    {
-        echo 'befor--';
+        var_dump($this->News->getList(1));
     }
 }
 ?>
