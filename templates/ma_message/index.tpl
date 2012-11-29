@@ -15,20 +15,16 @@
         </td>
         <th>UserName:</th>
         <td>{$message.username}</td>
-        <th>注册时间:</th>
-        <td>{$message.joinin}</td>
-        <th>最后登录/次/IP:</th>
-        <td>{$message.updated|default:'未登录'}/{$message.times}/{$message.lastip}</td>
+        <th>留言时间:</th>
+        <td>{$message.updated}</td>
     </tr>
     <tr>
-        <th>EMail:</th>
-        <td>{$message.email}</td>
-        <th>电话:</th>
-        <td>{$message.tel}</td>
-        <th>省份:</th>
-        <td>{$message.province}</td>
-        <th>城市:</th>
-        <td>{$message.city}</td>
+        <th>标题:</th>
+        <td>{$message.title}</td>
+        <th>内容:</th>
+        <td>{$message.message}</td>
+        <th>回复:</th>
+        <td>{$message.reply}</td>
     </tr>
     </table>
     {foreachelse}

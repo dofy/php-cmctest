@@ -25,14 +25,9 @@ class MessageController extends SevenController
 
     public function saveAction()
     {
-        $k['uid']      = md5(COMM::posts('uid'));
-        $k['name']     = md5(COMM::posts('name'));
-        $k['tel']      = md5(COMM::posts('tel'));
-        $k['addr']     = md5(COMM::posts('addr'));
-        $k['email']    = md5(COMM::posts('email'));
-        $k['postcode'] = md5(COMM::posts('postcode'));
-        $k['title']    = md5(COMM::posts('title'));
-        $k['message']  = md5(COMM::posts('message'));
+        $k['uid']      = COMM::posts('uid');
+        $k['title']    = COMM::posts('title');
+        $k['message']  = COMM::posts('message');
 
         $this->Message->addUser($k);
 
@@ -41,7 +36,7 @@ class MessageController extends SevenController
 
     public function replyAction()
     {
-        $k['reply']  = md5(COMM::posts('reply'));
+        $k['reply']  = COMM::posts('reply');
         $this->Message->reply($message);
     }
 
