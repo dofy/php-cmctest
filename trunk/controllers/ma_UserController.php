@@ -73,7 +73,7 @@ class UserController extends SevenController
         header('location: ?c=user');
     }
 
-    public function beforeAction()
+    public function actionBefore()
     {
         if(!COMM::getSs('islogin'))
         {

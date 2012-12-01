@@ -5,8 +5,12 @@
 <div id="content" class="grid_10">
     {include file="inc_ma/cat.tpl"}
     
-    <div class="grid_2 push_1" >
-        <p ><a href="?c=news&a=edit" >添加新闻</a></p>
+    <div class="grid_4 push_1" >
+        新闻分类: 
+        <select name="cid" onchange="location.href='?c=news&cid=' + this.value;" >
+        {html_options options=$ids selected=$cid}
+        </select>
+        <a href="?c=news&a=edit&cid={$cid}" >添加新闻</a>
     </div>
     
     {if $m == 'ok'}
@@ -24,8 +28,8 @@
     {foreach from=$news item='item'}
     <tr>
         <td class="text_right" >{$item.id}</td>
-        <td>{$item.title}</td>
-        <td>{$item.content|truncate:40:"...":false:true|escape:"html"}</td>
+        <td>{$item.title|strip_tags}</td>
+        <td>{$item.content|strip_tags|truncate:40:"...":false:true}</td>
         <td>{$item.updated}</td>
         <td class="text_center" >
         <a href="?c=news&a=edit&id={$item.id}" >编辑</a> | 

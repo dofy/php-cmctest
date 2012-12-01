@@ -10,13 +10,15 @@ class DefaultController extends SevenController
 {
     public function __construct()
     {
-        $this->models = array('news');
+        $this->models = array('news', 'imgloop');
         parent::__construct();
     }
 
     public function indexAction()
     {
-        var_dump($this->News->getList(1));
+        $this->assign('title', '首页');
+        $this->assign('news', $this->News->getTop(1, 3));
+        $this->assign('imgs', $this->Imgloop->getShow());
     }
 }
 ?>

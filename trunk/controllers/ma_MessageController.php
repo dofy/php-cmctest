@@ -47,7 +47,7 @@ class MessageController extends SevenController
         header('location: ?c=message');
     }
 
-    public function beforeAction()
+    public function actionBefore()
     {
         if(!COMM::getSs('islogin'))
         {

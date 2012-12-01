@@ -38,14 +38,14 @@ class PageController extends SevenController
         header("Location:?c=page&id=$id&m=ok");
     }
 
-    public function beforeAction()
+    public function actionBefore()
     {
         if(!COMM::getSs('islogin'))
         {
             header('Location:?c=login');
         }
 
-        $this->assign('ids', array(1 => '关于我们', '招聘信息'));
+        $this->assign('ids', array(1 => '关于我们', '人力资源', '业务范围', '联系我们'));
         $this->assign('m', COMM::gets('m'));
     }
 }

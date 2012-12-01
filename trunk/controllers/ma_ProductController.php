@@ -76,7 +76,7 @@ class ProductController extends SevenController
         header("Location:?c=product&cid=" . $k['cid'] . "&m=ok");
     }
 
-    public function beforeAction()
+    public function actionBefore()
     {
         if(!COMM::getSs('islogin'))
         {

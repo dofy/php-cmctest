@@ -83,15 +83,17 @@ class SevenApplication
         
         // 加载模板
         $this->view = new SevenView();
-        $this->view->assign('__controller', ucfirst($c));
-        $this->view->assign('__action', ucfirst($a));
+        $this->view->assign('__Controller', $c);
+        $this->view->assign('__Action', ucfirst($a));
+        $this->view->assign('__controller', strtolower($c));
+        $this->view->assign('__action', $a);
         
         $this->controller->setView($this->view);
         // 执行 Action
-        $this->controller->beforeAction();
+        $this->controller->actionBefore();
         if(method_exists($this->controller, $an))
             $this->controller->$an();
-        $this->controller->afterAction();
+        $this->controller->actionAfter();
         
         // 渲染模板
         @$this->view->display($tpl_file);

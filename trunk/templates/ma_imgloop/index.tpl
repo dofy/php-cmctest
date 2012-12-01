@@ -112,6 +112,8 @@
     <li id="img_{$item.id}" data-id="{$item.id}" data-show="{$item.show}" class="box {if $item.show}box-selected{/if}" >
         <img src="{$item.url}" height="100" />
     </li>
+    {foreachelse}
+    <li >还没有添加图片...</li>
     {/foreach}
     </ul>
     

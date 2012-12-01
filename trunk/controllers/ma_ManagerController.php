@@ -66,7 +66,7 @@ class ManagerController extends SevenController
         header('location: ?c=manager');
     }
 
-    public function beforeAction()
+    public function actionBefore()
     {
         if(!COMM::getSs('islogin'))
         {

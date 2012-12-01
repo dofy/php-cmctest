@@ -48,9 +48,5 @@ class LoginController extends SevenController
         COMM::clrSc();
         header('location: ?c=login');
     }
-
-    public function beforeAction()
-    {
-    }
 }
 ?>
