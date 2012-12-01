@@ -9,22 +9,22 @@
     {foreach from=$messages item='message'}
     <table>
     <tr>
-        <th class="text_right" >ID: {$message.id}</th>
-        <td>
-            <a href="?c=user&a=del&id={$message.id}" onclick="return confirm('确定要删除该留言吗?');">删除</a>
-        </td>
-        <th>UserName:</th>
-        <td>{$message.username}</td>
-        <th>留言时间:</th>
-        <td>{$message.updated}</td>
+        <th><em>{$message.id}</em> {$message.username} 
+        [<a href="?c=user&a=del&id={$message.id}" onclick="return confirm('确定要删除该留言吗?');">删除</a>]
+        <strong>留言时间:</strong> {$message.updated}</th>
+    </tr>
+    <tr >
+        <td ><strong>{$message.title}</strong></td>
     </tr>
     <tr>
-        <th>标题:</th>
-        <td>{$message.title}</td>
-        <th>内容:</th>
-        <td>{$message.message}</td>
-        <th>回复:</th>
-        <td>{$message.reply}</td>
+        <td><blockquote>{$message.message}</blockquote></td>
+    </tr>
+    <tr>
+        <td>
+            <form method="post" action="?c=message&a=reply&id={$message.id}" >
+            回复: <input type="text" name="reply" size="50" value="{$message.reply}" /> <input type="submit" value="Reply" />
+            </form>
+        </td>
     </tr>
     </table>
     {foreachelse}

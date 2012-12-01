@@ -71,7 +71,7 @@ class ImgloopController extends SevenController
         }
     }
 
-    public function beforeAction()
+    public function actionBefore()
     {
         if(!COMM::getSs('islogin'))
         {

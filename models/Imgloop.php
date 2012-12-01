@@ -18,6 +18,11 @@ class Imgloop extends SevenModule
         return $this->getAll("select * from $this->table");
     }
 
+    public function getShow()
+    {
+        return $this->getAll("select * from $this->table where `show`=1");
+    }
+
     public function addImage($url)
     {
         return $this->insert(array('url'=>$url));

@@ -9,26 +9,18 @@
     {foreach from=$users item='user'}
     <table>
     <tr>
-        <th class="text_right" >ID: {$user.id}</th>
-        <td>
-            <a href="?c=user&a=del&id={$user.id}" onclick="return confirm('确定要删除该用户吗?');">删除</a>
-        </td>
-        <th>UserName:</th>
-        <td>{$user.username}</td>
-        <th>注册时间:</th>
-        <td>{$user.joinin}</td>
-        <th>最后登录/次/IP:</th>
-        <td>{$user.updated|default:'未登录'}/{$user.times}/{$user.lastip}</td>
+        <th ><em>{$user.id}</em> <strong>{$user.name}</strong> ({$user.username})
+        {if $user.sex == 1} 男 {else} 女 {/if}
+        [<a href="?c=user&a=del&id={$user.id}" onclick="return confirm('确定要删除该用户吗?');">删除</a>]
+        <strong>注册时间: </strong>{$user.joinin} 
+        </th>
     </tr>
     <tr>
-        <th>EMail:</th>
-        <td>{$user.email}</td>
-        <th>电话:</th>
-        <td>{$user.tel}</td>
-        <th>省份:</th>
-        <td>{$user.province}</td>
-        <th>城市:</th>
-        <td>{$user.city}</td>
+        <td>
+        <strong>最后登录:</strong> {$user.updated} ({$user.times}次) <strong>IP:</strong> {$user.lastip}<br />
+        <strong>EMail:</strong> {$user.email}  <strong>电话:</strong> {$user.tel} <br />
+        <strong>省份:</strong> {$user.province} <strong>城市:</strong> {$user.city}<br />
+        <strong>地址:</strong> {$user.addr} <strong>邮编:</strong> {$user.postcode}<br />
     </tr>
     </table>
     {foreachelse}

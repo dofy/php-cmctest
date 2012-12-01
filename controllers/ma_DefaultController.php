@@ -20,7 +20,7 @@ class DefaultController extends SevenController
         $this->assign('updated', $_SESSION['updated']);
     }
 
-    public function beforeAction()
+    public function actionBefore()
     {
         if(!COMM::getSs('islogin'))
         {
