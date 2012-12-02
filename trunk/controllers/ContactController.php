@@ -17,7 +17,7 @@ class ContactController extends SevenController
     public function indexAction()
     {
         $this->assign('title', '联系我们');
-        $this->assign('content', $this->Page->getPage(5));
+        $this->assign('content', $this->Page->getPage(7));
     }
 
     public function actionBefore()
