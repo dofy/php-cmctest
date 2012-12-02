@@ -16,12 +16,12 @@ class News extends SevenModule
     public function getList($page, $cid)
     {
         $this->getCount();
-        return $this->getRows("select * from $this->table where cid=$cid order by updated desc", $page);
+        return $this->getRows("select * from $this->table where cid=$cid order by id desc, updated desc", $page);
     }
 
     public function getTop($cid, $nums)
     {
-        return $this->getAll("select id, title, updated from $this->table where cid=$cid order by updated desc limit $nums");
+        return $this->getAll("select id, title, updated from $this->table where cid=$cid order by id desc, updated desc limit $nums");
     }
 
     public function getNews($id)
@@ -29,14 +29,19 @@ class News extends SevenModule
         return $this->getOne("select * from $this->table where id=$id");
     }
 
-    public function getOlder($cid, $date)
+    public function updateTimes($id, $times)
     {
-        return $this->getOne("select id, title from $this->table where cid=$cid and updated<'$date' order by updated desc");
+        return $this->update(array('times'=>$times+1), array('id' => $id));
     }
 
-    public function getNewer($cid, $date)
+    public function getOlder($id, $cid, $date)
     {
-        return $this->getOne("select id, title from $this->table where cid=$cid and updated>'$date' order by updated asc");
+        return $this->getOne("select id, title from $this->table where cid=$cid and id<$id and updated<='$date' order by id desc, updated desc");
+    }
+
+    public function getNewer($id, $cid, $date)
+    {
+        return $this->getOne("select id, title from $this->table where cid=$cid and id>$id and updated>='$date' order by id asc, updated asc");
     }
 
     public function addNews($news)

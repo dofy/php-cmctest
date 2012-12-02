@@ -21,13 +21,13 @@
         <span class="r">
             <ul>
                 <li><a href="." {if $__controller == "default"}class="h_01"{/if}>首页</a></li>
-                <li><a href="about.html">关于腾芯</a></li>
-                <li><a href="Equipment.html">设备与能力</a></li>
-                <li><a href="Technical_services.html">技术服务</a></li>
+                <li><a href="?c=about" {if $__controller == "about"}class="h_01"{/if}>关于腾芯</a></li>
+                <li><a href="?c=product" {if $__controller == "product"}class="h_01"{/if}>设备与能力</a></li>
+                <li><a href="?c=technical" {if $__controller == "technical"}class="h_01"{/if}>技术服务</a></li>
                 <li><a href="?c=news" {if $__controller == "news"}class="h_01"{/if}>公司动态</a></li>
-                <li><a href="job.html">人力资源</a></li>
-                <li><a href="message.html">客户留言</a></li>
-                <li><a href="contact.html">联系我们</a></li>
+                <li><a href="?c=job" {if $__controller == "job"}class="h_01"{/if}>人力资源</a></li>
+                <li><a href="?c=message" {if $__controller == "message"}class="h_01"{/if}>客户留言</a></li>
+                <li><a href="?c=contact" {if $__controller == "contact"}class="h_01"{/if}>联系我们</a></li>
             </ul>
         </span>
 </div><!-- top_2 -->             
