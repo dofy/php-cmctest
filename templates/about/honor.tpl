@@ -5,7 +5,7 @@
 <div class="left">
     <p class="left_title">{$title}&nbsp;&nbsp;Honor</p>
     <div class="text">
-    {$content}
+    {$content.content}
     </div>
 </div><!-- /left -->
             

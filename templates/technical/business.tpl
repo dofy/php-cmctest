@@ -5,7 +5,7 @@
 <div class="left">
     <p class="left_title">{$title}&nbsp;&nbsp;Business Scope</p>
     <div class="text">
-    {$content}
+    {$content.content}
     </div>
 </div><!-- /left -->
             
