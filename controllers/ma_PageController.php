@@ -45,7 +45,7 @@ class PageController extends SevenController
             header('Location:?c=login');
         }
 
-        $this->assign('ids', array(1 => '关于我们', '人力资源', '业务范围', '联系我们'));
+        $this->assign('ids', array(1 => '公司介绍', '关于腾芯', '公司荣誉', '业务范围', '人力资源', '简历模板下载', '联系我们'));
         $this->assign('m', COMM::gets('m'));
     }
 }

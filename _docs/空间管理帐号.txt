@@ -8,15 +8,15 @@
 上传地址:cmctest58.gotoftp1.com
 ftp帐号:cmctest58 
 ftp密码:5520cetc58
-赠送二级域名：  cmctest58.gotoip1.com
+赠送二级域名： cmctest58.gotoip1.com
 －－－－－－－－－－－－－－－－－－－－－－－－－－－－
 mysql的地址为：	localhost (推荐)， 远程连接时使用域名: cmctest58.gotoftp1.com
 数据库名为：	cmctest58
 用户名：	cmctest58
-密码:      55F20ceEtc58fertyg
+密码: 55F20ceEtc58fertyg
 －－－－－－－－－－－－－－－－－－－－－－－－－－－－
 此网址由系统自动分配，若需要使用自己的域名，请登陆管理中心-绑定域名。
-登陆管理中心http://www.west263.com/manager，可对虚拟主机进行完善的管理（如：修改ftp密码、绑定域名、修改默认页、虚拟主机续费等）。
+登陆管理中心 http://www.west263.com/manager ，可对虚拟主机进行完善的管理（如：修改ftp密码、绑定域名、修改默认页、虚拟主机续费等）。
 特别提示：所有国内虚拟主机均需要先备案，然后才能绑定。备案网址：http://beian.vhostgo.com 备案期间可以先使用我司赠送的url转发服务。
 欢迎参加西部数码广告联盟，让你的网站流量为您带来收入！详情请访问：http://www.west263.com/agent/mode-d.asp
 欢迎与我司交换友情链接，共同提高google排名，详情请访问:http://www.addlink.cn/ 

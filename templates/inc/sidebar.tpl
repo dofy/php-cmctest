@@ -2,7 +2,9 @@
         <p class="title">{$title}</p>
         <div class="menu">
             <ul>
-                <li><a href="?c=news">公司动态</a></li>
+                {foreach from=$cats item="item"}
+                <li><a href="{$item.href}">{$item.title}</a></li>
+                {/foreach}
             </ul>
         </div>
     </div>
@@ -26,15 +28,15 @@
         <div id="scrollDiv">
             <ul>
                 {foreach from=$top10 item="item"}
-                <li><a href="?c=news&id={$item.id}">{$item.title}</a></li>
+                <li><a href="?c=news&a=article&id={$item.id}">{$item.title}</a></li>
                 {/foreach}
             </ul>
         </div>
     </div>
 </div>
 
-<div class="tu"><a href="Technical_services.html"><img src="images/jishu.jpg" /></a></div>
-<div class="tu"><a href="message.html"><img src="images/kehu.jpg" /></a></div>
+<div class="tu"><a href="?c=technical"><img src="images/jishu.jpg" /></a></div>
+<div class="tu"><a href="?c=message"><img src="images/kehu.jpg" /></a></div>
 
 <div class="lianxi">
     <p class="title">联系我们</p>
