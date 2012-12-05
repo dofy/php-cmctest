@@ -205,6 +205,10 @@ class SevenDB
                 return "'" . $this->sqlstr($value) . "'";
             }
         }
+        elseif(empty($value))
+        {
+            return "NULL";
+        }
         else
         {
             return $value;

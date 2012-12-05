@@ -45,7 +45,7 @@ class LoginController extends SevenController
     
     public function logoutAction()
     {
-        COMM::clrSc();
+        COMM::clrSs();
         header('location: ?c=login');
     }
 }

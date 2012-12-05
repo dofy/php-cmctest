@@ -28,6 +28,7 @@ class AboutController extends SevenController
 
     public function actionBefore()
     {
+        $this->assign('curuser', COMM::getSs('curuser', false));
         $this->assign('cats', array(
             array('title'=>'关于腾芯', 'href'=>'?c=about'), 
             array('title'=>'公司荣誉', 'href'=>'?c=about&a=honor')

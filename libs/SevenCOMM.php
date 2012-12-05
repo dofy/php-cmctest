@@ -26,12 +26,12 @@ class COMM
             return $default;
     }
     
-    static public function delSc($key)
+    static public function delSs($key)
     {
         unset($_SESSION[$key]);
     }
     
-    static public function clrSc()
+    static public function clrSs()
     {
         session_unset();
     }
