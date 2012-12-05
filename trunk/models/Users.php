@@ -20,9 +20,9 @@ class Users extends SevenModule
         return $this->getOne("select * from $this->table where `username` = '$username' and `password` = md5('$password')");
     }
 
-    public function savePass($pass)
+    public function savePass($pass, $id)
     {
-        return $this->update(array('password' => md5($pass)), array('id' => $_SESSION[id]));
+        return $this->update(array('password' => md5($pass)), array('id' =>$id));
     }
     
     public function getList()
@@ -38,7 +38,7 @@ class Users extends SevenModule
 
     public function getUserByName($username)
     {
-        return $this->getOne("select * from $this->table where `username` = '" . $this->sqlstr($username) . "'");
+        return $this->getOne("select * from $this->table where `username` = '" . SevenDB::sqlstr($username) . "'");
     }
 
     public function addUser($user)
