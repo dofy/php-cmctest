@@ -26,6 +26,7 @@ class ContactController extends SevenController
             array('title'=>'联系我们', 'href'=>'?c=contact')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('contact', $this->Page->getPage('10'));
     }
 }
 ?>

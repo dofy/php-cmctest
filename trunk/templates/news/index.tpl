@@ -1,11 +1,11 @@
 {include file="inc/header.tpl"}
 
-<div class="page_top">当前位置：<a href=".">首页</a> > <a href="?c=news">公司动态</a></div><!-- 当前位置 -->
+<div class="page_top">当前位置：<a href=".">首页</a> > <a href="?c={$__controller}&a=show">{$title}</a></div><!-- 当前位置 -->
 
 
 
 <div class="left">
-            <p class="left_title">公司动态&nbsp;&nbsp;News</p>
+            <p class="left_title">{$title}&nbsp;&nbsp;News</p>
             <div class="news">
             <ul>
             {foreach from=$news item='item'}

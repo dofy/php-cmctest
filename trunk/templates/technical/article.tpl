@@ -5,7 +5,7 @@
 <div class="left">
     <p class="left_bt">{$news.title|strip_tags}</p>
     <p class="left_time">时间:{$news.updated}&nbsp;&nbsp;&nbsp;&nbsp;点击:{$news.times}次</p>
-    <p class="text">{$news.content}</p>
+    <div class="text">{$news.content}</div>
 <p class="left_hr"><img src="images/hr.jpg" /></p>
 <p class="left_hr">
     <span class="s">上一篇：{if $newer}<a href="?c=technical&a=article&id={$newer.id}">{$newer.title|strip_tags}</a>{else}无{/if}</span>

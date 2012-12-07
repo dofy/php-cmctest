@@ -11,7 +11,7 @@ class UserController extends SevenController
 
     public function __construct()
     {
-        $this->models = array('users', 'message', 'news');
+        $this->models = array('users', 'message', 'news', 'page');
         parent::__construct();
     }
 
@@ -81,8 +81,9 @@ class UserController extends SevenController
             array('title'=>'我的订单', 'href'=>'?c=user&a=order'),
             array('title'=>'我的留言', 'href'=>'?c=user&a=message')
             ));
-        $this->assign('top10', $this->News->getTop(1, 10));
         $this->assign('m', COMM::gets('m'));
+        $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('contact', $this->Page->getPage('10'));
     }
 }
 ?>

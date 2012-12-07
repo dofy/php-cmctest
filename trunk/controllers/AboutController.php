@@ -34,6 +34,7 @@ class AboutController extends SevenController
             array('title'=>'公司荣誉', 'href'=>'?c=about&a=honor')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('contact', $this->Page->getPage('10'));
     }
 }
 ?>

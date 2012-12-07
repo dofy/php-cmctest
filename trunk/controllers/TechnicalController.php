@@ -47,6 +47,7 @@ class TechnicalController extends SevenController
             array('title'=>'业务范围', 'href'=>'?c=technical&a=business')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('contact', $this->Page->getPage('10'));
     }
 }
 ?>

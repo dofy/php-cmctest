@@ -6,38 +6,35 @@
  * Update:  11/20/08
  */
 
-class NewsController extends SevenController
+class ProductController extends SevenController
 {
     public function __construct()
     {
-        $this->models = array('news', 'page');
+        $this->models = array('product', 'news', 'page');
         parent::__construct();
     }
 
     public function indexAction()
     {
         $page = COMM::gets('page', 1);
-        $this->assign('news', $this->News->getList($page, 1));
+        $this->assign('product', $this->Product->getList($page, 1));
         
-        $pager = new SevenPager($this->News->pageInfo());
+        $pager = new SevenPager($this->Product->pageInfo());
         $this->assign('page', $pager->createHtml('page'));
     }
 
     public function articleAction()
     {
         $id = intval(COMM::gets('id', 0));
-        $news = $this->News->getNews($id);
-        $this->News->updateTimes($id, $news['times']);
-        $this->assign('news', $news);
-        $this->assign('older', $this->News->getOlder($news['id'], $news['cid'], $news['updated']));
-        $this->assign('newer', $this->News->getNewer($news['id'], $news['cid'], $news['updated']));
+        $product = $this->Product->getProduct($id);
+        $this->assign('product', $product);
     }
 
     public function actionBefore()
     {
-        $this->assign('title', '公司动态');
+        $this->assign('title', '设备与能力');
         $this->assign('cats', array(
-            array('title'=>'公司动态', 'href'=>'?c=news')
+            array('title'=>'设备与能力', 'href'=>'?c=product')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
         $this->assign('contact', $this->Page->getPage('10'));

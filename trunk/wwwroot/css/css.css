@@ -114,7 +114,7 @@ b.qrzc input{  border:0; width:232px; height:34px; }
 .news ul li.bt a{ float: left;}
 
 .equ{ width:570px; height:300px; margin:0 auto; }
-.equ span.l{ width:245px; height:286px;  float:left;}
+.equ span.l{ width:245px; height:286px;  float:left; margin: 10px 20px;}
 .equ span.l p{ font-size:14px; }
 .equ span.l p.bg{ width:243px; height:177px; text-align:center; padding-top:6px; margin-top:10px;  background:url(../images/equ_bg.jpg) no-repeat;}
 .equ span.l p.js{ font-size:12px; color:#999999;}

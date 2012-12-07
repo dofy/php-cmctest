@@ -39,15 +39,7 @@
 <div class="tu"><a href="?c=message"><img src="images/kehu.jpg" /></a></div>
 
 <div class="lianxi">
-    <p class="title">联系我们</p>
-    <p class="tong"><b>留言箱</b></p>
-    <p><font>zwtx@163.com</font></p>
-    <p class="tong"><b>销售热线</b></p>
-    <p>
-        Tel:0538-6929999&nbsp;&nbsp;6207727<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13884757288
-    </p>
-    <p>Far:0538-6207288</p>       
+    {$contact.content}     
 </div>
 {literal}
 <script type="text/javascript">
