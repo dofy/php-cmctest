@@ -39,7 +39,10 @@
 <div class="tu"><a href="?c=message"><img src="images/kehu.jpg" /></a></div>
 
 <div class="lianxi">
-    {$contact.content}     
+    <p class="title">联系我们</p>
+    <p class="tong" >
+    {$contact.content}
+    </p>
 </div>
 {literal}
 <script type="text/javascript">
