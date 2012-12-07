@@ -32,7 +32,7 @@
         <td>{$item.content|strip_tags|truncate:40:"...":false:true}</td>
         <td>{$item.updated}</td>
         <td class="text_center" >
-        <a href="?c=news&a=edit&id={$item.id}" >编辑</a> | 
+        <a href="?c=news&a=edit&cid={$cid}&id={$item.id}" >编辑</a> | 
         <a href="?c=news&a=del&id={$item.id}" onclick="return confirm('确定要删除该新闻吗?');">删除</a>
         </td>
     </tr>

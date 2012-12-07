@@ -5,7 +5,10 @@
 <div class="left">
     <p class="left_title">{$title}&nbsp;&nbsp;Message</p>
     <div class="text">
-    {$content}
+    <form method="post" action="" >
+        <p class="text_ly"><span class="lou">标题： *</span><span class="bt"><input type="text" class="kuang" /></span></p>
+        <p class="text_ly"><span class="lou">内容： *</span><span class="bt"><textarea class="neirong"></textarea></span></p>
+    </form>
     </div>
 </div><!-- /left -->
             

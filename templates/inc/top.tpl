@@ -24,7 +24,7 @@
         <span class="l"><img src="images/logo.jpg" alt="中微腾芯" /></span>
         <span class="r">
             <ul>
-                <li><a href="." {if $__controller == "default"}class="h_01"{/if}>首页</a></li>
+                <li><a href="." {if $__controller == "default" || $__controller == "user"}class="h_01"{/if}>首页</a></li>
                 <li><a href="?c=about" {if $__controller == "about"}class="h_01"{/if}>关于腾芯</a></li>
                 <li><a href="?c=product" {if $__controller == "product"}class="h_01"{/if}>设备与能力</a></li>
                 <li><a href="?c=technical" {if $__controller == "technical"}class="h_01"{/if}>技术服务</a></li>

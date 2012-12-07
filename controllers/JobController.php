@@ -33,6 +33,7 @@ class JobController extends SevenController
             array('title'=>'简历模板下载', 'href'=>'?c=job&a=download')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('contact', $this->Page->getPage('10'));
     }
 }
 ?>

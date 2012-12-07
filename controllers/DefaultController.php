@@ -10,7 +10,7 @@ class DefaultController extends SevenController
 {
     public function __construct()
     {
-        $this->models = array('news', 'imgloop');
+        $this->models = array('news', 'imgloop', 'page');
         parent::__construct();
     }
 
@@ -19,6 +19,8 @@ class DefaultController extends SevenController
         $this->assign('title', '首页');
         $this->assign('news', $this->News->getTop(1, 3));
         $this->assign('imgs', $this->Imgloop->getShow());
+        $this->assign('about', $this->Page->getPage('8'));
+        $this->assign('contact', $this->Page->getPage('9'));
     }
 }
 ?>

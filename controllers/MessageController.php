@@ -17,22 +17,16 @@ class MessageController extends SevenController
     public function indexAction()
     {
         $this->assign('title', '客户留言');
-        $this->assign('content', $this->Page->getPage(5));
-    }
-
-    public function showAction()
-    {
-        $this->assign('title', '查看留言');
-        $this->assign('content', $this->Page->getPage(5));
     }
 
     public function actionBefore()
     {
         $this->assign('cats', array(
             array('title'=>'客户留言', 'href'=>'?c=message'), 
-            array('title'=>'查看留言', 'href'=>'?c=message&a=show')
+            array('title'=>'查看留言', 'href'=>'?c=user&a=message')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('contact', $this->Page->getPage('10'));
     }
 }
 ?>
