@@ -36,8 +36,8 @@ class MessageController extends SevenController
 
     public function replyAction()
     {
-        $k['reply']  = COMM::posts('reply');
-        $this->Message->reply($message);
+        $this->Message->reply(intval(COMM::gets('id')), COMM::posts('reply'));
+        header('location: ?c=message');
     }
 
     public function delAction()

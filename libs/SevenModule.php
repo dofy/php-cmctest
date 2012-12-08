@@ -12,7 +12,7 @@ class SevenModule
     
     protected function __construct()
     {
-        $this->db = new SevenDB('localhost', 'root', '', 'cmctest');
+        $this->db = new SevenDB('localhost', 'root', '963', 'cmctest');
         //$this->db->debug = true;
     }
 

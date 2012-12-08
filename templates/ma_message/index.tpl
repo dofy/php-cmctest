@@ -9,9 +9,9 @@
     {foreach from=$messages item='message'}
     <table>
     <tr>
-        <th><em>{$message.id}</em> {$message.username} 
-        [<a href="?c=user&a=del&id={$message.id}" onclick="return confirm('确定要删除该留言吗?');">删除</a>]
-        <strong>留言时间:</strong> {$message.updated}</th>
+        <th><em>{$message.id}</em> <strong>{$message.name}</strong>  ({$message.username}) 的留言:
+        <span style="float:right;"><strong>留言时间:</strong> {$message.updated}
+        [<a href="?c=message&a=del&id={$message.id}" onclick="return confirm('确定要删除该留言吗?');">删除</a>]</span></th>
     </tr>
     <tr >
         <td ><strong>{$message.title}</strong></td>

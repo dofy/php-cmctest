@@ -38,6 +38,7 @@ class ProductController extends SevenController
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
         $this->assign('contact', $this->Page->getPage('10'));
+        $this->assign('curuser', COMM::getSs('curuser', false));
     }
 }
 ?>

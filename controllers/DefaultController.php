@@ -21,6 +21,7 @@ class DefaultController extends SevenController
         $this->assign('imgs', $this->Imgloop->getShow());
         $this->assign('about', $this->Page->getPage('8'));
         $this->assign('contact', $this->Page->getPage('9'));
+        $this->assign('curuser', COMM::getSs('curuser', false));
     }
 }
 ?>
