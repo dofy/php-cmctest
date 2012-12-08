@@ -29,11 +29,14 @@ class UserController extends SevenController
     public function orderAction()
     {
         $this->assign('title', '我的订单');
+        $this->assign('order', $this->Page->getPage('1'));
     }
 
     public function messageAction()
     {
+        $user = COMM::getSs('curuser');
         $this->assign('title', '我的留言');
+        $this->assign('mymessage', $this->Message->getMyMessage($user['id']));
     }
 
     public function savepassAction()
@@ -68,7 +71,6 @@ class UserController extends SevenController
     {
         if(COMM::getSs('curuser', false))
         {
-
             $this->assign('curuser', COMM::getSs('curuser'));
         }
         else

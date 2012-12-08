@@ -36,12 +36,12 @@ class News extends SevenModule
 
     public function getOlder($id, $cid, $date)
     {
-        return $this->getOne("select id, title from $this->table where cid=$cid and id<$id and updated<='$date' order by id desc, updated desc");
+        return $this->getOne("select id, title from $this->table where cid=$cid and id<$id order by id desc");
     }
 
     public function getNewer($id, $cid, $date)
     {
-        return $this->getOne("select id, title from $this->table where cid=$cid and id>$id and updated>='$date' order by id asc, updated asc");
+        return $this->getOne("select id, title from $this->table where cid=$cid and id>$id order by id asc");
     }
 
     public function addNews($news)
