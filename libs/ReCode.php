@@ -15,23 +15,23 @@ class ReCode
     const MODE_CHARACTER = 'mode_character';
     const MODE_ALL = 'mode_all';
     
-    private $mode;
-    private $length;
-    private $fontsize;
-    private $padding;
-    private $frontColor;
-    private $backgroundColor;
+    public $mode;
+    public $length;
+    public $font;
+    public $paddingTB;
+    public $paddingLR;
+    public $frontColor;
+    public $backgroundColor;
 
-
-    public function __construct($mode = null, $length = 4, $fontsize = 14, $padding = 5, RGBColor $frontColor = null, RGBColor $backgroundColor = null)
+    public function __construct($mode = null, $length = 4, $font = 3, $paddingTB = 3, $paddingLR = 10, $frontColor = 0xffffff, $backgroundColor = 0)
     {
         $this->mode = is_null($mode) ? self::MODE_NUMERAL : $mode;
         $this->length = $length;
-        $this->fontsize = $fontsize;
-        $this->padding = $padding;
-        $this->frontColor = is_null($frontColor) ? new RGBColor(0xff, 0xff, 0xff) : $frontColor;
-        $this->backgroundColor = is_null($backgroundColor) ? new RGBColor() : $backgroundColor;
-		
+        $this->font = $font;
+        $this->paddingTB = $paddingTB;
+        $this->paddingLR = $paddingLR;
+        $this->frontColor = $frontColor;
+        $this->backgroundColor = $backgroundColor;
     }
 
     private function getCode()
@@ -61,15 +61,34 @@ class ReCode
         return $result;
     }
 
-    public function getImage($session_key = 'recode')
+    public function getImage($session_key, $noise = 0)
     {
+        session_start();
         $_SESSION[$session_key] = $this->getCode();
+        $font_width = imagefontwidth($this->font);
+        $font_height = imagefontheight($this->font);
         
-        echo $_SESSION[$session_key];
+        $width = $font_width * $this->length + $this->paddingLR * 2;
+        $height = $font_height + $this->paddingTB * 2;
+        
+        $im = imagecreatetruecolor($width, $height);
+        imagefill($im, 0, 0, $this->backgroundColor);
+        imagestring($im, $this->font, $this->paddingLR, $this->paddingTB, $_SESSION[$session_key], $this->frontColor);
+        
+        for($i = 0; $i < $noise; $i++)
+        {
+            imagesetpixel($im, rand(0, $width), rand(0, $height), $this->frontColor);
+        }
+        
+        header('Content-type: image/png');
+        imagepng($im);
     }
 
 }
 
+/**
+ * 废了
+ * */
 class RGBColor
 {
     private $data = array('R'=>0, 'G'=>0, 'B'=>0, 'A'=>0);
@@ -107,9 +126,5 @@ class RGBColor
         return null;
     }
 }
-
-$rc = new ReCode();
-
-echo $rc->getImage();
 
 ?>

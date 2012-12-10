@@ -7,7 +7,7 @@
             {if $msg}<strong style="color:#f00;">{$msg}</strong>{/if}
             <b class="t">账&nbsp;&nbsp;&nbsp;&nbsp;号：<input type="text" name="username" /></b>
             <b class="h">密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" /></b>
-            <b class="r">验 证 码：<input type="text" name="checkcode" /><img src="images/yzm.jpg" /></b>
+            <b class="r">验 证 码：<input type="text" name="recode" /><img src="recode.php" title="看不清? 点击刷新" onclick="this.src = this.src;" /></b>
             <b class="ee">
                 <input type="button" style="background:url(images/zcan.jpg) no-repeat;" value=""
                     onclick="location.href='?c=login&a=register';" /> 

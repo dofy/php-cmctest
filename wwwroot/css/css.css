@@ -31,7 +31,7 @@ b.h{ clear:both; display:block; width:100%; height:33px;  font-size:14px; line-h
 b.h input{ width:160px; border:1px solid #c0c3c8; background:#f4f5f7;}
 b.r{ clear:both; display:block; width:100%; height:33px;   font-size:14px; padding-bottom:10px; border-bottom:1px solid #b4b4b4; line-height:30px;}
 b.r input{ width:80px; border:1px solid #c0c3c8; background:#f4f5f7; }
-b.r img{  width:67px; height:22px; margin-left:10px;   margin-top:10px; }
+b.r img{ margin-left:10px; }
 b.ee{ clear:both; display:block; width:100%; height:33px;  line-height:30px; padding-top:10px;}
 b.ee input{ width:80px; height:33px; border:0; float:right; margin-left:10px; }
 

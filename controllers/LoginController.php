@@ -23,6 +23,14 @@ class LoginController extends SevenController
     {
         $username = COMM::posts('username');
         $password = COMM::posts('password');
+        $recode = COMM::posts('recode');
+        
+        if(strtoupper($recode) != COMM::getSs('recode'))
+        {
+            header('Location:?c=login&m=验证码错误.');
+            return;
+        }
+        
         $user = $this->Users->checkUser($username, $password);
         if($user)
         {
