@@ -12,12 +12,9 @@
     <p class="title">设备与能力</p>
     <div class=" list">
         <ul>
-            <li><img src="images/pro_01.jpg" /></li>
-            <li><img src="images/pro_02.jpg" /></li>
-            <li><img src="images/pro_03.jpg" /></li>
-            <li><img src="images/pro_01.jpg" /></li>
-            <li><img src="images/pro_02.jpg" /></li>
-            <li><img src="images/pro_03.jpg" /></li>
+            {foreach from=$ptop6 item="item"}
+            <li><a href="?c=product&a=article&id={$item.id}"><img src="{$item.url}" title="{$item.title}" /></a></li>
+            {/foreach}
         </ul>
     </div>
 </div>

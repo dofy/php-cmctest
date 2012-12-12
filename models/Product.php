@@ -16,12 +16,17 @@ class Product extends SevenModule
     public function getList($page, $cid)
     {
         $this->getCount();
-        return $this->getRows("select * from $this->table where `cid` = $cid order by `updated` desc", $page);
+        return $this->getRows("select * from $this->table where `cid` = $cid order by id desc", $page);
     }
 
     public function getProduct($id)
     {
         return $this->getOne("select * from $this->table where `id` = $id");
+    }
+
+    public function getTop($cid, $nums)
+    {
+        return $this->getAll("select id, url, title from $this->table where cid=$cid order by id desc limit $nums");
     }
 
     public function addProduct($product)

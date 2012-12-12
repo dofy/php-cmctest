@@ -10,7 +10,7 @@ class TechnicalController extends SevenController
 {
     public function __construct()
     {
-        $this->models = array('news', 'page');
+        $this->models = array('news', 'page', 'product');
         parent::__construct();
     }
 
@@ -47,6 +47,7 @@ class TechnicalController extends SevenController
             array('title'=>'业务范围', 'href'=>'?c=technical&a=business')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('ptop6', $this->Product->getTop(1, 6));
         $this->assign('contact', $this->Page->getPage('10'));
         $this->assign('curuser', COMM::getSs('curuser', false));
     }

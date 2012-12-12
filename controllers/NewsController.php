@@ -10,7 +10,7 @@ class NewsController extends SevenController
 {
     public function __construct()
     {
-        $this->models = array('news', 'page');
+        $this->models = array('news', 'page', 'product');
         parent::__construct();
     }
 
@@ -40,6 +40,7 @@ class NewsController extends SevenController
             array('title'=>'公司动态', 'href'=>'?c=news')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('ptop6', $this->Product->getTop(1, 6));
         $this->assign('contact', $this->Page->getPage('10'));
         $this->assign('curuser', COMM::getSs('curuser', false));
     }

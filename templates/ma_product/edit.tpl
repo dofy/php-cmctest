@@ -56,8 +56,8 @@
     {/literal}
     <div class="clear" ></div>
     <form method="post" action="?c=product&a=save" onsubmit="return checkForm(this);" >
-        <p >产品分类: 
-        <select name="cid" >{html_options options=$ids selected=$cid}</select>
+        <p ><!--产品分类: 
+        <select name="cid" >{html_options options=$ids selected=$cid}</select> -->
         名称: <input type="text" name="title" size="40" value="{$product.title}" /></p>
         <div class="grid_7 alpha" ><textarea name="content" rows="17" cols="60" >{$product.content|escape:"html"}</textarea></div>
         <div class="grid_3 omega" ><img id="img_upload" src="{$product.url|default:'images/img.png'}" width="200" /></div>

@@ -31,7 +31,11 @@
 
 <div class="y_link">
     <span class="title">友情链接</span> 
-    <span class="link"><a href="#">友情链接</a> <a href="#">友情链接</a> <a href="#">友情链接</a></span>
+    <span class="link">
+    {foreach from=$links item="item"}
+    <a href="{$item.href}" target="_blank" >{$item.title}</a>
+    {/foreach}
+    </span>
 </div>
 
 </div><!-- content中部 -->
