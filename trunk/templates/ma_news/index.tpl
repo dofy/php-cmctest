@@ -28,7 +28,7 @@
     {foreach from=$news item='item'}
     <tr>
         <td class="text_right" >{$item.id}</td>
-        <td>{$item.title|strip_tags}</td>
+        <td>{$item.title|strip_tags} <em style="float: right;">({$item.times}次)</em></td>
         <td>{$item.content|strip_tags|truncate:40:"...":false:true}</td>
         <td>{$item.updated}</td>
         <td class="text_center" >

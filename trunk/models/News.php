@@ -16,12 +16,12 @@ class News extends SevenModule
     public function getList($page, $cid)
     {
         $this->getCount();
-        return $this->getRows("select * from $this->table where cid=$cid order by id desc, updated desc", $page);
+        return $this->getRows("select * from $this->table where cid=$cid order by updated desc", $page);
     }
 
     public function getTop($cid, $nums)
     {
-        return $this->getAll("select id, title, updated from $this->table where cid=$cid order by id desc, updated desc limit $nums");
+        return $this->getAll("select id, title, updated from $this->table where cid=$cid order by updated desc limit $nums");
     }
 
     public function getNews($id)

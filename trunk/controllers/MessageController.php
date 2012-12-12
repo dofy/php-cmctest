@@ -10,7 +10,7 @@ class MessageController extends SevenController
 {
     public function __construct()
     {
-        $this->models = array('news', 'page', 'message');
+        $this->models = array('news', 'page', 'message', 'product');
         parent::__construct();
     }
 
@@ -51,6 +51,7 @@ class MessageController extends SevenController
             array('title'=>'查看留言', 'href'=>'?c=user&a=message')
             ));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('ptop6', $this->Product->getTop(1, 6));
         $this->assign('contact', $this->Page->getPage('10'));
         $this->assign('curuser', COMM::getSs('curuser', false));
     }

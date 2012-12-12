@@ -54,10 +54,12 @@
     {/literal}
 
     <div class="grid_4 push_1" >
+        <!--
         产品分类: 
         <select name="cid" onchange="location.href='?c=product&cid=' + this.value;" >
         {html_options options=$ids selected=$cid}
         </select>
+        -->
         <a href="?c=product&a=edit&cid={$cid}" >添加产品</a>
     </div>
 

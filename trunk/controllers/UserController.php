@@ -11,7 +11,7 @@ class UserController extends SevenController
 
     public function __construct()
     {
-        $this->models = array('users', 'message', 'news', 'page');
+        $this->models = array('users', 'message', 'news', 'page', 'product');
         parent::__construct();
     }
 
@@ -85,6 +85,7 @@ class UserController extends SevenController
             ));
         $this->assign('m', COMM::gets('m'));
         $this->assign('top10', $this->News->getTop(1, 10));
+        $this->assign('ptop6', $this->Product->getTop(1, 6));
         $this->assign('contact', $this->Page->getPage('10'));
     }
 }
