@@ -101,7 +101,7 @@ class UserController extends SevenController
     public function delAction()
     {
         $id = intval(COMM::gets('id'));
-        //$this->Users->delUser($id);
+        $this->Users->delUser($id);
         $this->Users->delFiles($id);
         $this->Message->delMyMessage($id);
         header('location: ?c=user');
