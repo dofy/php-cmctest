@@ -14,11 +14,14 @@ include __BASE_PATH . 'Smarty.class.php';
 
 // core
 include __BASE_PATH . 'SevenCOMM.php';
-include __BASE_PATH . 'SevenLog.php';
 include __BASE_PATH . 'SevenDB.php';
 include __BASE_PATH . 'SevenPager.php';
 include __BASE_PATH . 'SevenView.php';
 include __BASE_PATH . 'SevenModule.php';
 include __BASE_PATH . 'SevenController.php';
+
+include __BASE_PATH . 'SevenUploader.php';
+
+include __BASE_PATH . 'SevenLog.php';
 
 ?>

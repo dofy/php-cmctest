@@ -64,11 +64,45 @@ class UserController extends SevenController
         }
         header('location: ?c=user&m=ok');
     }
+    
+    public function filesAction()
+    {
+        $id = intval(COMM::gets('id'));
+        $this->assign('user', $this->Users->getUser($id));
+        $this->assign('name', COMM::gets('name'));
+        
+        $this->assign('inbox', $this->Users->getInbox($id));
+        $this->assign('outbox', $this->Users->getOutbox($id));
+    }
+    
+    public function uploadAction()
+    {
+        $id = intval(COMM::gets('id'));
+        $folder = 'files/' . $id . '/inbox/';
+        $uploader = new SevenUploader(
+                        array('jpg', 'jpeg', 'gif', 'png', 'swf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'txt', 'zip', 'rar', '7z'),
+                        'user_file', 2000000);
+        $result = $uploader->upload($folder, SevenUploader::SAME_NAME);
+        
+        header("location: ?c=user&a=files&id=$id&m=" . $result['msg']);
+    }
+    
+    public function delfileAction()
+    {
+        $id = intval(COMM::gets('id'));
+        $dir = COMM::gets('d');
+        $file = COMM::gets('f');
+        
+        $m = $this->Users->delFile($id, $dir, $file) ? '删除成功.' : '删除失败.';
+        
+        header("location: ?c=user&a=files&id=$id&m=$m");
+    }
 
     public function delAction()
     {
         $id = intval(COMM::gets('id'));
-        $this->Users->delUser($id);
+        //$this->Users->delUser($id);
+        $this->Users->delFiles($id);
         $this->Message->delMyMessage($id);
         header('location: ?c=user');
     }

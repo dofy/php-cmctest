@@ -30,6 +30,45 @@ class Users extends SevenModule
         $this->getCount();
         return $this->getRows("select * from $this->table");
     }
+    
+    public function getInbox($id)
+    {
+        return $this->fileList("files/$id/inbox");
+    }
+    
+    public function getOutbox($id)
+    {
+        return $this->fileList("files/$id/outbox");
+    }
+    
+    public function delFile($id, $folder, $file)
+    {
+        $file = "files/$id/$folder/$file";
+        return unlink($file);
+    }
+    
+    public function delFiles($id)
+    {
+        $dir = "files/$id";
+        
+        COMM::unlinkRecursive($dir, true);
+    }
+    
+    private function fileList($folder)
+    {
+        $result = array();
+        if(file_exists($folder))
+        {
+            $dh = opendir($folder);
+            while(($file = readdir($dh)) !== false)
+            {
+                if(is_dir($file)) continue;
+                array_push($result, array('name'=>$file, 'size'=> COMM::fileSizeFormat(filesize($folder . '/' . $file))));
+            }
+            closedir($dh);
+        }
+        return $result;
+    }
 
     public function getUser($id)
     {
