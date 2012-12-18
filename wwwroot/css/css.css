@@ -179,3 +179,26 @@ p.page_02 img{ margin:10px auto; width:100%; height:100%;  }
 .footer{ width:100%; height:60px; margin:0 auto;  background:#eaecef; margin-top:10px;}
 .footer .center{ width:960px; height:50px; margin:0 auto; color:#333333; line-height:23px; padding-top:10px;  }
 
+
+
+
+.msg {
+    clear: both;
+    padding: 5px;
+    background-color: #ff0;
+}
+
+.myfiles table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid #999;
+  border-right: 1px solid #999;
+}
+.myfiles th {
+    background-color: #eee;
+}
+.myfiles td, th {
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    padding: 3px;
+}

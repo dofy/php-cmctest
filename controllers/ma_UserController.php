@@ -78,7 +78,7 @@ class UserController extends SevenController
     public function uploadAction()
     {
         $id = intval(COMM::gets('id'));
-        $folder = 'files/' . $id . '/inbox/';
+        $folder = 'files/' . $id . '/inbox';
         $uploader = new SevenUploader(
                         array('jpg', 'jpeg', 'gif', 'png', 'swf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'txt', 'zip', 'rar', '7z'),
                         'user_file', 2000000);
