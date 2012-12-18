@@ -28,8 +28,36 @@ class UserController extends SevenController
 
     public function orderAction()
     {
+        $user = COMM::getSs('curuser');
         $this->assign('title', '我的订单');
         $this->assign('order', $this->Page->getPage('1'));
+        
+        $this->assign('inbox', $this->Users->getInbox($user['id']));
+        $this->assign('outbox', $this->Users->getOutbox($user['id']));
+    }
+    
+    public function uploadAction()
+    {
+        $user = COMM::getSs('curuser');
+        $id = $user['id'];
+        $folder = 'files/' . $id . '/outbox';
+        $uploader = new SevenUploader(
+                        array('jpg', 'jpeg', 'gif', 'png', 'swf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'txt', 'zip', 'rar', '7z'),
+                        'user_file', 2000000);
+        $result = $uploader->upload($folder, SevenUploader::SAME_NAME);
+        
+        header("location: ?c=user&a=order&m=" . $result['msg']);
+    }
+    
+    public function delfileAction()
+    {
+        $user = COMM::getSs('curuser');
+        $id = $user['id'];
+        $file = COMM::gets('f');
+        
+        $m = $this->Users->delFile($id, 'outbox', $file) ? '删除成功.' : '删除失败.';
+        
+        header("location: ?c=user&a=order&m=$m");
     }
 
     public function messageAction()
