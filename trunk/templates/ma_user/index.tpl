@@ -11,6 +11,7 @@
     <tr>
         <th ><em>{$user.id}</em> <strong>{$user.name}</strong> ({$user.username})
         {if $user.sex == 1} 男 {else} 女 {/if}
+        [<a href="?c=user&a=files&id={$user.id}&name={$user.name}">文件管理</a>]
         [<a href="?c=user&a=del&id={$user.id}" onclick="return confirm('确定要删除该用户吗?');">删除</a>]
         <strong>注册时间: </strong>{$user.joinin} 
         </th>

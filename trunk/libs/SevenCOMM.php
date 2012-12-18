@@ -56,6 +56,51 @@ class COMM
     {
         setcookie($key, null);
     }
+    
+    static public function fileSizeFormat($size)
+    {
+        if($size < 1024)
+        {
+            return $size . ' bytes';
+        }
+        elseif($size < 1024 * 1024)
+        {
+            return round($size / 1024 * 100) / 100 . ' KB';
+        }
+        else
+        {
+            return round($size / 1024 / 1024 * 100) / 100 . ' MB';
+        }
+    }
+    
+    static function unlinkRecursive($dir, $deleteRootToo = false) 
+    { 
+        if(!$dh = @opendir($dir)) 
+        { 
+            return;
+        } 
+        while (false !== ($obj = readdir($dh))) 
+        { 
+            if($obj == '.' || $obj == '..') 
+            { 
+                continue; 
+            }
+            
+            if (!@unlink($dir . '/' . $obj)) 
+            { 
+                self::unlinkRecursive($dir.'/'.$obj, true); 
+            } 
+        }
+        
+        closedir($dh); 
+        
+        if ($deleteRootToo) 
+        { 
+            @rmdir($dir); 
+        } 
+        
+        return; 
+    } 
 }
 
 ?>
