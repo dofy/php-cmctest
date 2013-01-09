@@ -44,7 +44,12 @@ class PageController extends SevenController
         {
             header('Location:?c=login');
         }
-
+        if($_SESSION['level'] > 1)
+        {
+            header('Location:?');
+        }
+        
+        $this->assign('lvl', $_SESSION['level']);
         $this->assign('ids', 
             array(
                 1 => '用户订单页', '关于腾芯', '公司荣誉', '业务范围', '人力资源', 

@@ -53,6 +53,11 @@ class MessageController extends SevenController
         {
             header('Location:?c=login');
         }
+        if($_SESSION['level'] > 1)
+        {
+            header('Location:?');
+        }
+        $this->assign('lvl', $_SESSION['level']);
         $this->assign('m', COMM::gets('m'));
     }
 }

@@ -19,10 +19,15 @@ class Users extends SevenModule
         $password = SevenDB::sqlstr($password);
         return $this->getOne("select * from $this->table where `username` = '$username' and `password` = md5('$password')");
     }
+    
+    public function setPassed($passed, $id)
+    {
+        return $this->update(array('passed' => $passed), array('id' => $id));
+    }
 
     public function savePass($pass, $id)
     {
-        return $this->update(array('password' => md5($pass)), array('id' =>$id));
+        return $this->update(array('password' => md5($pass)), array('id' => $id));
     }
     
     public function getList()

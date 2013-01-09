@@ -10,7 +10,7 @@ class UserController extends SevenController
 {
     public function __construct()
     {
-        $this->models = array('users', 'message');
+        $this->models = array('users', 'message', 'notify');
         parent::__construct();
     }
 
@@ -22,12 +22,27 @@ class UserController extends SevenController
         $pager = new SevenPager($this->Users->pageInfo());
         $this->assign('page', $pager->createHtml('page'));
     }
+    
+    public function passedAction()
+    {
+        $id = intval(COMM::gets('id'));
+        $passed = intval(COMM::gets('passed'));
+        $this->Users->setPassed($passed, $id);
+        header("location: ?c=user");
+    }
+    
+    public function chgpassAction()
+    {
+        $this->assign('id', COMM::gets('id'));
+        $this->assign('name', COMM::gets('name'));
+    }
 
     public function savepassAction()
     {
+        $id = intval(COMM::gets('id'));
         $pass = COMM::posts('npass');
-        $this->Users->savePass($pass);
-        header('location: ?c=user&a=chgpass&m=ok');
+        $this->Users->savePass($pass, $id);
+        header("location: ?c=user&a=chgpass&id=$id&m=ok");
     }
 
     public function saveAction()
@@ -71,6 +86,8 @@ class UserController extends SevenController
         $this->assign('user', $this->Users->getUser($id));
         $this->assign('name', COMM::gets('name'));
         
+        $this->Notify->markAllAsRead($id, 2);
+        
         $this->assign('inbox', $this->Users->getInbox($id));
         $this->assign('outbox', $this->Users->getOutbox($id));
     }
@@ -78,11 +95,17 @@ class UserController extends SevenController
     public function uploadAction()
     {
         $id = intval(COMM::gets('id'));
+        
         $folder = 'files/' . $id . '/inbox';
         $uploader = new SevenUploader(
                         array('jpg', 'jpeg', 'gif', 'png', 'swf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'txt', 'zip', 'rar', '7z'),
-                        'user_file', 2000000);
-        $result = $uploader->upload($folder, SevenUploader::SAME_NAME);
+                        'user_file', 200000000);
+        $result = $uploader->upload($folder, SevenUploader::AUTO_INDEX);
+        
+        if($result['code'] == 0)
+        {
+            $this->Notify->addNotify($id, 1);
+        }
         
         header("location: ?c=user&a=files&id=$id&m=" . $result['msg']);
     }
@@ -113,6 +136,7 @@ class UserController extends SevenController
         {
             header('Location:?c=login');
         }
+        $this->assign('lvl', $_SESSION['level']);
         $this->assign('m', COMM::gets('m'));
     }
 }

@@ -9,6 +9,15 @@
         <ul>
             <li>时间: {$updated}</li>
             <li>IP: {$lastip}</li>
+        </ul>
+        {if $notify}
+        用户上传文件通知:
+        <ul>
+            {foreach from=$notify item='item'}
+            <li>用户 <a href="?c=user&a=files&id={$item.uid}">{$item.username}</a> 上传了 {$item.c} 个文件</li>
+            {/foreach}
+        </ul>
+        {/if}
     </p>
 </div>
 

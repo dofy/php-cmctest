@@ -12,7 +12,11 @@
         <th ><em>{$user.id}</em> <strong>{$user.name}</strong> ({$user.username})
         {if $user.sex == 1} 男 {else} 女 {/if}
         [<a href="?c=user&a=files&id={$user.id}&name={$user.name}">文件管理</a>]
+        {if $lvl == 1}
+        [<a href="?c=user&a=chgpass&name={$user.username}&id={$user.id}" >重置密码</a>]
         [<a href="?c=user&a=del&id={$user.id}" onclick="return confirm('确定要删除该用户吗?');">删除</a>]
+        <label><input type="checkbox" name="pass" {if $user.passed}checked="checked"{/if} onclick="location.href='?c=user&a=passed&id={$user.id}&passed=' + (this.checked ? 1 : 0);" /> 是否通过审核</label>
+        {/if}
         <strong>注册时间: </strong>{$user.joinin} 
         </th>
     </tr>
