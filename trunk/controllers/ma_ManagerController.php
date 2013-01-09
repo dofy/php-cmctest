@@ -36,11 +36,11 @@ class ManagerController extends SevenController
     public function saveAction()
     {
         $id = intval(COMM::posts('id'));
-        if($id <= 0 || COMM::posts('password') != '')
+        if(COMM::posts('password') != '')
             $k['password'] = md5(COMM::posts('password'));
+        $k['level'] = COMM::posts('level');
         if($id <= 0)
         {
-            $k['level'] = 2;//COMM::posts('level');
             // add
             $has = $this->Manager->getManagerByName(COMM::posts('username'));
             if(is_array($has))
@@ -54,6 +54,8 @@ class ManagerController extends SevenController
         else
         {
             // update
+            if($id == 1)
+                $k['level'] = 1;
             $this->Manager->editManager($k, $id);
         }
         header('location: ?c=manager&m=ok');
@@ -72,8 +74,13 @@ class ManagerController extends SevenController
         {
             header('Location:?c=login');
         }
+        if($_SESSION['level'] > 1 && COMM::gets('a') != 'chgpass' && COMM::gets('a') != 'savepass')
+        {
+            header('Location:?');
+        }
+        $this->assign('lvl', $_SESSION['level']);
         $this->assign('m', COMM::gets('m'));
-        $this->assign('level_opt', array(1=>'管理员', 2=>'普通用户'));
+        $this->assign('level_opt', array(1=>'超级管理员', 2=>'普通管理员'));
     }
 }
 ?>

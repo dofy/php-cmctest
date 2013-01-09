@@ -11,7 +11,7 @@ class UserController extends SevenController
 
     public function __construct()
     {
-        $this->models = array('users', 'message', 'news', 'page', 'product');
+        $this->models = array('users', 'message', 'notify', 'news', 'page', 'product');
         parent::__construct();
     }
 
@@ -19,6 +19,8 @@ class UserController extends SevenController
     {
         $this->assign('title', '个人信息');
         
+        $user = COMM::getSs('curuser');
+        $this->assign('notify', $this->Notify->getMyList($user['id']));
     }
 
     public function chgpassAction()
@@ -32,6 +34,8 @@ class UserController extends SevenController
         $this->assign('title', '我的订单');
         $this->assign('order', $this->Page->getPage('1'));
         
+        $this->Notify->markAllAsRead($user['id'], 1);
+        
         $this->assign('inbox', $this->Users->getInbox($user['id']));
         $this->assign('outbox', $this->Users->getOutbox($user['id']));
     }
@@ -43,8 +47,13 @@ class UserController extends SevenController
         $folder = 'files/' . $id . '/outbox';
         $uploader = new SevenUploader(
                         array('jpg', 'jpeg', 'gif', 'png', 'swf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'txt', 'zip', 'rar', '7z'),
-                        'user_file', 2000000);
-        $result = $uploader->upload($folder, SevenUploader::SAME_NAME);
+                        'user_file', 200000000);
+        $result = $uploader->upload($folder, SevenUploader::AUTO_INDEX);
+        
+        if($result['code'] == 0)
+        {
+            $this->Notify->addNotify($id, 2);
+        }
         
         header("location: ?c=user&a=order&m=" . $result['msg']);
     }
@@ -97,20 +106,25 @@ class UserController extends SevenController
 
     public function actionBefore()
     {
-        if(COMM::getSs('curuser', false))
+        $user = COMM::getSs('curuser', false);
+        if($user)
         {
-            $this->assign('curuser', COMM::getSs('curuser'));
+            $this->assign('curuser', $user);
         }
         else
         {
             header('Location:?c=login');
         }
-        $this->assign('cats', array(
+        $cats = array(
             array('title'=>'个人信息', 'href'=>'?c=user'),
             array('title'=>'修改密码', 'href'=>'?c=user&a=chgpass'),
-            array('title'=>'我的订单', 'href'=>'?c=user&a=order'),
             array('title'=>'我的留言', 'href'=>'?c=user&a=message')
-            ));
+            );
+        if($user['passed'])
+        {
+            array_push($cats, array('title'=>'我的订单', 'href'=>'?c=user&a=order'));
+        }
+        $this->assign('cats', $cats);
         $this->assign('m', COMM::gets('m'));
         $this->assign('top10', $this->News->getTop(1, 10));
         $this->assign('ptop6', $this->Product->getTop(1, 6));

@@ -4,8 +4,15 @@
 
 <div class="left">
     <p class="left_title">{$title}&nbsp;&nbsp;User</p>
-         
-    <p class="text">注册时间：{$curuser.joinin}<br />登录次数：{$curuser.times}<br />最后登录时间：{$curuser.updated}</p>
+    
+    <p class="text">
+        注册时间：{$curuser.joinin}<br />
+        登录次数：{$curuser.times}<br />
+        最后登录时间：{$curuser.updated}<br />
+        {if $curuser.passed && $notify.c}
+        收到管理员上传的 <a href="?c=user&a=order">{$notify.c} 个新文件</a>.<br />
+        {/if}
+    </p>
 
     <p class="text_bg"><span>姓&nbsp;&nbsp;&nbsp;&nbsp;名：{$curuser.name}</span>
                        <span>用户名：{$curuser.username}</span>

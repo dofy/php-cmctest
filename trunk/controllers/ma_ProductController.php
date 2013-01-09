@@ -82,7 +82,12 @@ class ProductController extends SevenController
         {
             header('Location:?c=login');
         }
+        if($_SESSION['level'] > 1)
+        {
+            header('Location:?');
+        }
         
+        $this->assign('lvl', $_SESSION['level']);
         $this->assign('ids', array(1 => '产品分类1', '产品分类2'));
         $this->assign('m', COMM::gets('m'));
     }

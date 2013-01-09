@@ -12,12 +12,10 @@
     <div class="clear"></div>
     <form method="post" action="?c=manager&a=save" onsubmit="return checkForm(this);">
     <strong>{if $manager.id > 0}修改{else}添加{/if}用户:</strong>
-     <label for="username">用户名:</label><input id="username" type="text" name="username" value="{$manager.username}" {if $manager.id>0}readonly="readonly"{/if} />
-     <label for="password">密码:</label><input id="password" type="text" name="password" />
-     <!--
+     <label for="username">用户名:</label><input id="username" type="text" name="username" value="{$manager.username}" {if $manager.id>0}readonly="readonly"{/if} size="12" />
+     <label for="password">密码:</label><input id="password" type="text" name="password" size="12" />
      <label>权限:</label>
         {html_radios name="level" options=$level_opt selected=$manager.level}
-        -->
      <input type="hidden" name="id" value="{$manager.id}" />
      <input type="submit" value="保存" />
      <input type="button" value="取消" onclick="location.href='?c=manager';" />
@@ -27,7 +25,7 @@
     <tr>
     <th>ID</th>
     <th>用户名</th>
-    <!--th>用户组</th-->
+    <th>用户组</th>
     <th>最后登录时间</th>
     <th>最后登录IP</th>
     <th>编辑</th>
@@ -36,7 +34,7 @@
     <tr>
      <td class="text_right" >{$item.id}</td>
      <td>{$item.username}</td>
-     <!--td>{$level_opt[$item.level]}</td-->
+     <td>{$level_opt[$item.level]}</td>
      <td>{$item.updated}</td>
      <td>{$item.lastip}</td>
      <td class="text_center" >

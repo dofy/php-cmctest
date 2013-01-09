@@ -10,6 +10,7 @@ class DefaultController extends SevenController
 {
     public function __construct()
     {
+        $this->models = array('notify');
         parent::__construct();
     }
 
@@ -26,6 +27,9 @@ class DefaultController extends SevenController
         {
             header('Location:?c=login');
         }
+        
+        $this->assign('notify', $this->Notify->getUserList());
+        $this->assign('lvl', $_SESSION['level']);
     }
 }
 ?>
