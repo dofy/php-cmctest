@@ -52,7 +52,7 @@ class PageController extends SevenController
         $this->assign('lvl', $_SESSION['level']);
         $this->assign('ids', 
             array(
-                1 => '用户订单页', '关于腾芯', '公司荣誉', '业务范围', '人力资源', 
+                1 => '设备与能力', '关于腾芯', '公司荣誉', '业务范围', '人力资源', 
                      '简历模板下载', '联系我们', '首页.公司介绍', '首页.联系我们', '侧栏.联系我们'));
         $this->assign('m', COMM::gets('m'));
     }

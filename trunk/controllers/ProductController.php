@@ -16,6 +16,8 @@ class ProductController extends SevenController
 
     public function indexAction()
     {
+        $this->assign('content', $this->Page->getPage(1));
+
         $page = COMM::gets('page', 1);
         $this->assign('product', $this->Product->getList($page, 1));
         
