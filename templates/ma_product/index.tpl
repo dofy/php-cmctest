@@ -40,13 +40,13 @@
                     });
             }
         });
-        $('.box')
-            .live('mouseenter', function(e) {
+        $('#imgbox')
+            .on('mouseenter', '.box', function(e) {
                 var item = $(e.currentTarget),
                     id   = item.data('id');
                 $('#del-proxy').show().prependTo(item).data('id', id);
             })
-            .live('mouseleave', function(e) {
+            .on('mouseleave', '.box', function(e) {
                 $('#del-proxy').hide();
             });
     });

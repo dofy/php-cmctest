@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{$title} - 无锡中微腾芯电子有限公司欢迎您!</title>
 <link href="css/css.css" type="text/css" rel="stylesheet" />
-<script src="js/jquery-1.8.2.min.js" ></script>
+<script src="js/jquery.min.js" ></script>
 <script>
 //var site_title = '无锡中微腾芯电子有限公司';
 //var site_url = 'http://www.cmctest.com';

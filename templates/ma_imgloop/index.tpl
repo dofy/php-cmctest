@@ -23,6 +23,7 @@
     {literal}
     <script>
     KindEditor.ready(function(K) {
+
         var editor = K.editor({
             allowFileManager : true
         });
@@ -35,7 +36,7 @@
                             function(data) {
                                 if(data.error == 0)
                                 {
-                                    var img = $('<li id="img_' + data.id + '" class="box" ><img src="' + data.url + '" height="100" /></li>');
+                                    var img = $('<li id="img_' + data.id + '" class="box" ><img src="' + data.url + '" height="120" /></li>');
                                     img.data({'id': data.id, 'show': 0});
                                     $('#imgbox').append(img);
                                 }
@@ -70,16 +71,18 @@
                     });
             }
         });
-        $('.box')
-            .live('mouseenter', function(e) {
+
+        $('#imgbox')
+            .sortable()
+            .on('mouseenter', '.box', function(e) {
                 var item = $(e.currentTarget),
                     id   = item.data('id');
                 $('#del-proxy').show().prependTo(item).data('id', id);
             })
-            .live('mouseleave', function(e) {
+            .on('mouseleave', '.box', function(e) {
                 $('#del-proxy').hide();
             })
-            .live('click', function(e) {
+            .on('click', '.box', function(e) {
                 var item = $(e.currentTarget),
                     id   = item.data('id'),
                     show = item.data('show');
@@ -99,6 +102,7 @@
                         }
                 });
             });
+
     });
     </script>
     {/literal}
@@ -110,7 +114,7 @@
     <ul id="imgbox" class="grid_10" >
     {foreach from=$imgs item='item'}
     <li id="img_{$item.id}" data-id="{$item.id}" data-show="{$item.show}" class="box {if $item.show}box-selected{/if}" >
-        <img src="{$item.url}" height="100" />
+        <img src="{$item.url}" height="120" />
     </li>
     {foreachelse}
     <li >还没有添加图片...</li>
