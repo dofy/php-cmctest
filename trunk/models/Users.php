@@ -51,6 +51,12 @@ class Users extends SevenModule
         $file = "files/$id/$folder/$file";
         return unlink($file);
     }
+
+    public function getFile($id, $folder, $file)
+    {
+        $file = "files/$id/$folder/$file";
+        return $file;
+    }
     
     public function delFiles($id)
     {

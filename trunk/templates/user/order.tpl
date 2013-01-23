@@ -12,7 +12,7 @@
         {foreach from=$inbox item='item' name='file'}
         <tr>
             <td>{$smarty.foreach.file.index + 1}</td>
-            <td><a href="files/{$curuser.id}/inbox/{'gbk'|iconv:'utf-8':$item.name|urlencode}" target="_blank">{$item.name}</a></td>
+            <td><a href="?c=user&a=download&d=inbox&f={$item.name}" target="_blank">{$item.name|base64_decode}</a></td>
             <td>{$item.size}</td>
         </tr>
         {/foreach}
@@ -30,9 +30,9 @@
         {foreach from=$outbox item='item' name='file'}
         <tr>
             <td>{$smarty.foreach.file.index + 1}</td>
-            <td><a href="files/{$curuser.id}/outbox/{$item.name|urlencode}" target="_blank">{$item.name}</a></td>
+            <td><a href="?c=user&a=download&d=outbox&f={$item.name}" target="_blank">{$item.name|base64_decode}</a></td>
             <td>{$item.size}</td>
-            <td><a href="?c=user&a=delfile&f={$item.name|urlencode}">删除</a></td>
+            <td><a href="?c=user&a=delfile&f={$item.name}">删除</a></td>
         </tr>
         {/foreach}
     </table>

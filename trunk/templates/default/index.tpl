@@ -1,9 +1,11 @@
 {include file="inc/header.tpl"}
 
-<div class="four_img">
+<div class="four_img" >
+<marquee behavior="alternate">
     {foreach from=$imgs item='item' name='img'}
-    <span class="f_0{$smarty.foreach.img.index + 1}"><img src="{$item.url}" width="200" height="100" /></span>
+    <span ><img src="{$item.url}" width="200" height="100" /></span>
     {/foreach}
+</marquee>
 </div>
 
 <div class="a_n_c">

@@ -19,9 +19,9 @@
         {foreach from=$inbox item='item' name='file'}
         <tr>
             <td>{$smarty.foreach.file.index + 1}</td>
-            <td><a href="files/{$user.id}/inbox/{'gbk'|iconv:'utf-8':$item.name|urlencode}" target="_blank">{$item.name}</a></td>
+            <td><a href="?c=user&a=download&id={$user.id}&d=inbox&f={$item.name}" target="_blank">{$item.name|base64_decode}</a></td>
             <td>{$item.size}</td>
-            <td><a href="?c=user&a=delfile&id={$user.id}&d=inbox&f={$item.name|urlencode}">删除</a></td>
+            <td><a href="?c=user&a=delfile&id={$user.id}&d=inbox&f={$item.name}">删除</a></td>
         </tr>
         {/foreach}
     </table>
@@ -31,9 +31,9 @@
         {foreach from=$outbox item='item' name='file'}
         <tr>
             <td>{$smarty.foreach.file.index + 1}</td>
-            <td><a href="files/{$user.id}/outbox/{$item.name|urlencode}" target="_blank">{$item.name}</a></td>
+            <td><a href="?c=user&a=download&id={$user.id}&d=outbox&f={$item.name}" target="_blank">{$item.name|base64_decode}</a></td>
             <td>{$item.size}</td>
-            <td><a href="?c=user&a=delfile&id={$user.id}&d=outbox&f={$item.name|urlencode}">删除</a></td>
+            <td><a href="?c=user&a=delfile&id={$user.id}&d=outbox&f={$item.name}">删除</a></td>
         </tr>
         {/foreach}
     </table>
