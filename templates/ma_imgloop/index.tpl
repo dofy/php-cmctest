@@ -73,7 +73,7 @@
         });
 
         $('#imgbox')
-            .sortable()
+            //.sortable()
             .on('mouseenter', '.box', function(e) {
                 var item = $(e.currentTarget),
                     id   = item.data('id');

@@ -57,6 +57,23 @@ class UserController extends SevenController
         
         header("location: ?c=user&a=order&m=" . $result['msg']);
     }
+
+    public function downloadAction()
+    {
+        $user = COMM::getSs('curuser');
+        $id = $user['id'];
+        $dir = COMM::gets('d');
+        $file = COMM::gets('f');
+
+        $f = $this->Users->getFile($id, $dir, $file);
+
+        header("Content-disposition: attachment; filename=" . base64_decode($file));
+        header("Content-type: application/octet-stream");
+        header("Content-Length: " . filesize($f));
+        ob_clean();
+        readfile($f);
+        exit;
+    }
     
     public function delfileAction()
     {

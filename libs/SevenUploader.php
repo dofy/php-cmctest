@@ -99,23 +99,23 @@ class SevenUploader
         switch($newName)
         {
             case self::SAME_NAME:
-                return $fileName;
+                return base64_encode($fileName);
                 break;
             
             case self::AUTO_INDEX:
                 $ind = 0;
                 $name = join('.', $parts);
-                $full_name = $folder . '/' . $name;
+                $full_name = $folder . '/' . base64_encode($name . '.' . $ext);
                 
-                if(!file_exists($full_name . '.' . $ext))
+                if(!file_exists($full_name))
                 {
-                    return $name . '.' . $ext;
+                    return base64_encode($name . '.' . $ext);
                 }
                 else
                 {
                     while(true)
                     {
-                        $result = $name . '_' . ++$ind . '.' . $ext;
+                        $result = base64_encode($name . '_' . ++$ind . '.' . $ext);
                         if(!file_exists( $folder . '/' . $result))
                             return $result;
                     }
@@ -123,10 +123,10 @@ class SevenUploader
                 break;
             
             case self::RANDOM_NAME:
-                return md5(time()) . '.' . $ext;
+                return base64_encode(md5(time()) . '.' . $ext);
                 break;
             default:
-                return $newName;
+                return base64_encode($newName);
                 break;
         }
     }

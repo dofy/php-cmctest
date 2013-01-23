@@ -41,11 +41,8 @@ b.xb input{  border:0; margin-left:10px; }
 b.qrzc{ clear:both; display:block; width:232px; margin:0 auto; height:34px;  line-height:30px; padding-top:10px;}
 b.qrzc input{  border:0; width:232px; height:34px; }
 
-.content .four_img{ width:960px; height:113px;  clear:both; margin-bottom:15px; overflow:hidden;}
-.content .four_img span.f_01{ width:212px; height:106px; float:left; margin-left:0px; border:1px solid #cdcdcd; text-align:center; padding-top:5px; }
-.content .four_img span.f_02{ width:212px; height:106px; float:left; margin-left:35px; border:1px solid #cdcdcd; text-align:center; padding-top:5px; }
-.content .four_img span.f_03{ width:212px; height:106px; float:left; margin-left:35px; border:1px solid #cdcdcd; text-align:center; padding-top:5px; }
-.content .four_img span.f_04{ width:212px; height:106px; float: right; margin-right:0px; border:1px solid #cdcdcd; text-align:center; padding-top:5px; }
+.content .four_img { width:960px; height:113px;  clear:both; margin-bottom:15px; overflow:hidden; white-space:nowrap;}
+.content .four_img span { width:212px; height:106px; border: 1px solid #cdcdcd; padding:5px; }
 
 .content .a_n_c{ width:960px; height:208px; background:url(../images/a_n_c.jpg) no-repeat;clear:both; margin-bottom:15px;}
 .content .a_n_c .about{ width:610px; height:153px;  float:left; overflow:hidden; line-height:28px; padding:40px 0 0 20px; }
