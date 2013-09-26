@@ -2,28 +2,54 @@
 
 class COMM
 {
-    static public function gets($key, $default = null)
+    static public function gets($key = null, $default = null)
     {
-        if(isset($_GET[$key]))
-            return $_GET[$key];
+        if($key == null)
+        {
+            return $_GET;
+        }
         else
-            return $default;
+        {
+            if(isset($_GET[$key]))
+                return $_GET[$key];
+            else
+                return $default;
+        }
     }
 
-    static public function posts($key, $default = null)
+    static public function posts($key = null, $default = null)
     {
-        if(isset($_POST[$key]))
-            return $_POST[$key];
+        if($key == null)
+        {
+            return $_POST;
+        }
         else
-            return $default;
+        {
+            if(isset($_POST[$key]))
+                return $_POST[$key];
+            else
+                return $default;
+        }
+    }
+
+    static public function setSs($key, $value)
+    {
+        $_SESSION[$key] = $value;
     }
     
-    static public function getSs($key, $default = null)
+    static public function getSs($key = null, $default = null)
     {
-        if(isset($_SESSION[$key]))
-            return $_SESSION[$key];
+        if($key == null)
+        {
+            return $_SESSION;
+        }
         else
-            return $default;
+        {
+            if(isset($_SESSION[$key]))
+                return $_SESSION[$key];
+            else
+                return $default;
+        }
     }
     
     static public function delSs($key)
@@ -36,18 +62,25 @@ class COMM
         session_unset();
     }
     
-    static public function getCk($key, $default = null)
+    static public function getCk($key = null, $default = null)
     {
-        if(isset($_COOKIE[$key]))
-            return $_COOKIE[$key];
+        if($key == null)
+        {
+            return $_COOKIE;
+        }
         else
-            return $default;
+        {
+            if(isset($_COOKIE[$key]))
+                return $_COOKIE[$key];
+            else
+                return $default;
+        }
     }
     
     static public function setCk($key, $value, $expire = 0)
     {
         if($expire > 0)
-            $exprite += time();
+            $expire += time();
             
         setcookie($key, $value, $expire);
     }
@@ -101,6 +134,7 @@ class COMM
         
         return; 
     } 
+
 }
 
 ?>
